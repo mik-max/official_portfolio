@@ -290,7 +290,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section ref={heroRef} id="home" className="relative z-20 min-h-dvh flex flex-col justify-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-24 pb-40 sm:pb-32 overflow-hidden">
+      <section ref={heroRef} id="home" className="relative z-20 min-h-dvh  h-auto flex flex-col justify-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-24 pb-40 sm:pb-45 overflow-hidden">
         <div className="max-w-4xl space-y-6 sm:space-y-8 relative z-20">
           <div className="hero-badge inline-flex items-center px-4 py-1.5 sm:px-5 sm:py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-xs sm:text-sm font-medium text-white/80">
             Frontend Engineer • 4+ Years
