@@ -23,12 +23,29 @@ export default function Home() {
 
   useEffect(() => {
     // 1. Initialize Lenis for smooth scroll
-    const lenis = new Lenis();
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo out
+    });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
+
+    // Smooth scroll for all anchor links
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLAnchorElement;
+      const href = target.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href === '#' ? 0 : href;
+        lenis.scrollTo(targetId);
+      }
+    };
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', handleAnchorClick as any);
+    });
 
     // 2. Custom Cursor Logic
     const onMouseMove = (e: MouseEvent) => {
@@ -88,7 +105,7 @@ export default function Home() {
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '#about',
-          start: 'top 70%',
+          start: 'top 75%',
         }
       }
     );
@@ -109,10 +126,10 @@ export default function Home() {
         }
       );
 
-      // Section tracker for navbar
+      // Section tracker for navbar - Updated start/end to be tighter
       ScrollTrigger.create({
         trigger: `#${sectionId}`,
-        start: 'top 40%',
+        start: 'top 30%',
         end: 'bottom 40%',
         onEnter: () => setActiveSection(sectionId),
         onEnterBack: () => setActiveSection(sectionId),
@@ -123,13 +140,16 @@ export default function Home() {
     ScrollTrigger.create({
       trigger: heroRef.current,
       start: 'top top',
-      end: 'bottom 40%',
+      end: 'bottom 50%',
       onEnter: () => setActiveSection('home'),
       onEnterBack: () => setActiveSection('home'),
     });
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.removeEventListener('click', handleAnchorClick as any);
+      });
       ScrollTrigger.getAll().forEach((t: any) => t.kill());
       lenis.destroy();
     };
@@ -291,7 +311,7 @@ export default function Home() {
               View My Work ↗
             </a>
             <a
-              href="/resume.pdf"
+              href="/assets/resume.pdf"
               download
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -325,7 +345,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative py-20 sm:py-28 border-t border-white/10 bg-black z-30">
+      <section id="about" className="relative py-20 sm:py-28 border-t border-white/10 bg-black/80  z-30">
         <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
@@ -476,7 +496,7 @@ export default function Home() {
             <span className="text-xs sm:text-sm uppercase tracking-[1px] text-white/60 font-medium">CHAPTER 04 • SELECTED WORK</span>
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20">Featured Projects</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-center">
             {projects.map((project, idx) => (
               <a
                 key={idx}
