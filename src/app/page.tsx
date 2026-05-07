@@ -92,6 +92,44 @@ export default function Home() {
     { id: 'contact', label: 'Contact', href: '#contact' },
   ];
 
+  const projects = [
+    {
+      title: "Mainstack Referral Program",
+      description: "Dynamic referral system with real-time tracking, multi-currency payouts and seamless sharing flows.",
+      url: "https://mainstack.com/referral-program",
+      image: "/images/project-thumbnails/referral.png",
+      tags: ["Tailwind", "TypeScript", "Next.js"]
+    },
+    {
+      title: "Mainstack Ambassador Program",
+      description: "High-conversion ambassador platform with lifetime revenue share and intuitive merchant dashboards.",
+      url: "https://mainstack.com/ambassador-program",
+      image: "/images/project-thumbnails/ambassador.png",
+      tags: ["Next.js", "TypeScript", "GSAP"]
+    },
+    {
+      title: "Collabify",
+      description: "Creator-brand collaboration platform with smooth micro-interactions and early-access onboarding.",
+      url: "https://usecollabify.com/",
+      image: "/images/project-thumbnails/collabify.png",
+      tags: ["Next.js", "Tailwind", "TypeScript"]
+    },
+    {
+      title: "Mainstack Link-In-Bio",
+      description: "Customizable, high-performance link-in-bio platform for modern creators and entrepreneurs.",
+      url: "https://mainstack.com/products/link-in-bio",
+      image: "/images/project-thumbnails/link-in-bio.png",
+      tags: ["GSAP", "Next.js", "Design Systems"]
+    },
+    {
+      title: "Mainstack Invoicing",
+      description: "Streamlined professional invoicing and payment tracking for global freelancers and businesses.",
+      url: "https://mainstack.com/products/invoicing",
+      image: "/images/project-thumbnails/invoice.png",
+      tags: ["TypeScript", "Next.js", "Tailwind"]
+    }
+  ];
+
   return (
     <main className="bg-black text-white min-h-screen overflow-x-hidden font-sans">
       {/* Full Background Cinematic Image */}
@@ -108,7 +146,7 @@ export default function Home() {
       </div>
 
       {/* Modern Floating Navbar */}
-      <nav className="fixed top-6 left-0 right-0 z-50 px-6 max-w-[1400px] mx-auto w-full flex items-center justify-between">
+      <nav className="fixed top-6 left-0 right-0 z-[100] px-6 max-w-[1400px] mx-auto w-full flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-emerald-600 flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(59,130,246,0.3)]">
             M
@@ -148,7 +186,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section ref={heroRef} id="home" className="relative z-20 min-h-[100dvh] flex flex-col justify-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-20">
+      <section ref={heroRef} id="home" className="relative z-20 min-h-[100dvh] flex flex-col justify-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-20 pb-32">
         <div className="max-w-3xl space-y-8 relative z-20">
           <div className="hero-badge inline-flex items-center px-5 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-sm font-medium text-white/80">
             Frontend Engineer • 4+ Years
@@ -168,8 +206,10 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className="hero-bottom absolute bottom-8 left-6 right-6 lg:left-20 lg:right-20 z-20">
-          <div className="rounded-[2rem] bg-gradient-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 p-8 flex flex-col md:flex-row gap-8 md:gap-16 justify-between items-start md:items-center shadow-2xl">
+
+        {/* Hero Bottom Info - Layout Fixed for MacBook 13 Aspect Ratio */}
+        <div className="hero-bottom mt-20 lg:absolute lg:bottom-8 2xl:bottom-12 lg:left-20 lg:right-20 z-20">
+          <div className="rounded-4xl bg-linear-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 p-8 flex flex-col md:flex-row gap-8 md:gap-16 justify-between items-start md:items-center shadow-2xl">
             <div className="relative pl-6 flex-1">
               <div className="absolute left-0 top-1 w-4 h-4 border-t border-l border-white/40" />
               <h3 className="text-2xl font-bold mt-2">©2026</h3>
@@ -327,51 +367,34 @@ export default function Home() {
           </div>
           <h2 className="text-5xl md:text-6xl font-bold tracking-tight leading-none mb-20">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <a href="https://mainstack.com/referral-program" target="_blank" className="group bg-white/5 border border-white/10 hover:border-white/30 rounded-3xl overflow-hidden transition-all hover:-translate-y-2">
-              <div className="aspect-video bg-gradient-to-br from-zinc-900 to-black relative flex items-center justify-center">
-                <div className="text-white/30 text-6xl font-light tracking-tighter">REFERRAL</div>
-              </div>
-              <div className="p-8">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-semibold">Mainstack Referral Program</h3>
-                  <span className="text-emerald-400 text-xs font-medium px-3 py-1 bg-emerald-400/10 rounded-full">LIVE</span>
+            {projects.map((project, idx) => (
+              <a
+                key={idx}
+                href={project.url}
+                target="_blank"
+                className="group bg-white/5 border border-white/10 hover:border-white/30 rounded-3xl overflow-hidden transition-all hover:-translate-y-2"
+              >
+                <div className="aspect-video relative overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
                 </div>
-                <p className="text-white/70 text-[1.05rem] mb-6">Dynamic referral system with real-time tracking, multi-currency payouts and seamless sharing flows.</p>
-                <div className="flex flex-wrap gap-2">
-                  {['React', 'TypeScript', 'Next.js'].map(tag => <span key={tag} className="text-xs px-4 py-2 bg-white/10 rounded-2xl">{tag}</span>)}
+                <div className="p-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-semibold leading-tight">{project.title}</h3>
+                    <span className="text-emerald-400 text-xs font-medium px-3 py-1 bg-emerald-400/10 rounded-full flex-shrink-0">LIVE</span>
+                  </div>
+                  <p className="text-white/70 text-[1.05rem] mb-6 line-clamp-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map(tag => <span key={tag} className="text-xs px-4 py-2 bg-white/10 rounded-2xl">{tag}</span>)}
+                  </div>
                 </div>
-              </div>
-            </a>
-            <a href="https://mainstack.com/ambassador-program" target="_blank" className="group bg-white/5 border border-white/10 hover:border-white/30 rounded-3xl overflow-hidden transition-all hover:-translate-y-2">
-              <div className="aspect-video bg-gradient-to-br from-zinc-900 to-black relative flex items-center justify-center">
-                <div className="text-white/30 text-6xl font-light tracking-tighter">AMBASSADOR</div>
-              </div>
-              <div className="p-8">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-semibold">Mainstack Ambassador Program</h3>
-                  <span className="text-emerald-400 text-xs font-medium px-3 py-1 bg-emerald-400/10 rounded-full">LIVE</span>
-                </div>
-                <p className="text-white/70 text-[1.05rem] mb-6">High-conversion ambassador platform with lifetime revenue share and intuitive merchant dashboards.</p>
-                <div className="flex flex-wrap gap-2">
-                  {['React', 'TypeScript', 'GSAP'].map(tag => <span key={tag} className="text-xs px-4 py-2 bg-white/10 rounded-2xl">{tag}</span>)}
-                </div>
-              </div>
-            </a>
-            <a href="https://usecollabify.com/" target="_blank" className="group bg-white/5 border border-white/10 hover:border-white/30 rounded-3xl overflow-hidden transition-all hover:-translate-y-2">
-              <div className="aspect-video bg-gradient-to-br from-zinc-900 to-black relative flex items-center justify-center">
-                <div className="text-white/30 text-6xl font-light tracking-tighter">COLLABIFY</div>
-              </div>
-              <div className="p-8">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-semibold">Collabify</h3>
-                  <span className="text-emerald-400 text-xs font-medium px-3 py-1 bg-emerald-400/10 rounded-full">LIVE</span>
-                </div>
-                <p className="text-white/70 text-[1.05rem] mb-6">Creator-brand collaboration platform with smooth micro-interactions and early-access onboarding.</p>
-                <div className="flex flex-wrap gap-2">
-                  {['Next.js', 'Tailwind', 'TypeScript'].map(tag => <span key={tag} className="text-xs px-4 py-2 bg-white/10 rounded-2xl">{tag}</span>)}
-                </div>
-              </div>
-            </a>
+              </a>
+            ))}
           </div>
         </div>
       </section>
