@@ -844,6 +844,16 @@ export default function Home() {
                   </div>
                 </a>
                 <div className="h-px bg-white/10"></div>
+                <a href="https://wa.me/2347087509689" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="block group">
+                  <div className="flex items-center justify-between text-left">
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2 font-bold">WHATSAPP</div>
+                      <div className="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors break-all sm:break-normal">+234 708 750 9689</div>
+                    </div>
+                    <span className="text-2xl sm:text-4xl text-white/20 group-hover:text-white group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300">↗</span>
+                  </div>
+                </a>
+                <div className="h-px bg-white/10"></div>
                 <div className="flex items-center justify-between text-left">
                   <div>
                     <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2 font-bold">CURRENT LOCATION</div>
