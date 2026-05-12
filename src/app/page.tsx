@@ -17,145 +17,11 @@ export default function Home() {
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
 
-  // Cursor Refs
   const cursorOuterRef = useRef<HTMLDivElement>(null);
   const cursorInnerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // 1. Initialize Lenis for smooth scroll
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo out
-    });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
 
-    // Smooth scroll for all anchor links
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLAnchorElement;
-      const href = target.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        const targetId = href === '#' ? 0 : href;
-        lenis.scrollTo(targetId);
-      }
-    };
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', handleAnchorClick as any);
-    });
-
-    // 2. Custom Cursor Logic
-    const onMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      gsap.to(cursorOuterRef.current, {
-        x: clientX,
-        y: clientY,
-        duration: 0.5,
-        ease: 'power3.out',
-      });
-      gsap.to(cursorInnerRef.current, {
-        x: clientX,
-        y: clientY,
-        duration: 0.1,
-      });
-    };
-    window.addEventListener('mousemove', onMouseMove);
-
-    // 3. Hero Entrance Sequence - Simplified
-    const tl = gsap.timeline();
-
-    tl.fromTo('.hero-badge',
-      { opacity: 0, y: 20, filter: 'blur(10px)' },
-      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: 'expo.out' }
-    )
-      .fromTo('.hero-title',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' },
-        '-=0.7'
-      )
-      .fromTo('.hero-desc',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
-        '-=1.2'
-      )
-      .fromTo('.hero-cta',
-        { opacity: 0, y: 20, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power4.out', stagger: 0.15 },
-        '-=0.8'
-      )
-      .fromTo('.hero-bottom',
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out' },
-        '-=1'
-      );
-
-    // 4. About Section Word-by-Word Reveal
-    const aboutTitleSplit = new SplitText('.about-title', { type: 'words' });
-    gsap.fromTo(aboutTitleSplit.words,
-      { opacity: 0, y: 30, rotationX: -45 },
-      {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '#about',
-          start: 'top 75%',
-        }
-      }
-    );
-
-    // Scroll reveal animations for other sections
-    ['about', 'skills', 'experience', 'projects', 'contact'].forEach(sectionId => {
-      gsap.fromTo(`#${sectionId} .section-content`,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: `#${sectionId}`,
-            start: 'top 75%',
-          }
-        }
-      );
-
-      // Section tracker for navbar - Updated start/end to be tighter
-      ScrollTrigger.create({
-        trigger: `#${sectionId}`,
-        start: 'top 30%',
-        end: 'bottom 40%',
-        onEnter: () => setActiveSection(sectionId),
-        onEnterBack: () => setActiveSection(sectionId),
-      });
-    });
-
-    // Special case for home tracker
-    ScrollTrigger.create({
-      trigger: heroRef.current,
-      start: 'top top',
-      end: 'bottom 50%',
-      onEnter: () => setActiveSection('home'),
-      onEnterBack: () => setActiveSection('home'),
-    });
-
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', handleAnchorClick as any);
-      });
-      ScrollTrigger.getAll().forEach((t: any) => t.kill());
-      lenis.destroy();
-    };
-  }, []);
-
-  // Update pill position when active section changes
+  // // Update pill position when active section changes
   useEffect(() => {
     const activeElement = navRefs.current[activeSection];
     if (activeElement) {
@@ -166,6 +32,364 @@ export default function Home() {
     }
   }, [activeSection]);
 
+  useEffect(() => {
+    // =========================
+    // LENIS
+    // =========================
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    // =========================
+    // SMOOTH ANCHORS
+    // =========================
+
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLAnchorElement;
+      const href = target.getAttribute('href');
+
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href === '#' ? 0 : href;
+        lenis.scrollTo(targetId);
+      }
+    };
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', handleAnchorClick as any);
+    });
+
+    // =========================
+    // CURSOR
+    // =========================
+
+    const onMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+
+      gsap.to(cursorOuterRef.current, {
+        x: clientX,
+        y: clientY,
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+
+      gsap.to(cursorInnerRef.current, {
+        x: clientX,
+        y: clientY,
+        duration: 0.1,
+      });
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+
+    // =========================
+    // HERO CINEMATIC REVEAL
+    // =========================
+
+    const heroTitle = new SplitText('.hero-title', {
+      type: 'lines,chars',
+      linesClass: 'hero-line',
+    });
+
+    const heroDesc = new SplitText('.hero-desc', {
+      type: 'lines',
+    });
+
+    gsap.set(heroTitle.chars, {
+      yPercent: 120,
+      rotateX: -90,
+      transformOrigin: '0% 50% -50',
+      opacity: 0,
+    });
+
+    gsap.set(heroDesc.lines, {
+      yPercent: 100,
+      opacity: 0,
+    });
+
+    const heroTl = gsap.timeline({
+      defaults: {
+        ease: 'expo.out',
+      },
+    });
+
+    heroTl
+      .fromTo(
+        '.hero-badge',
+        {
+          opacity: 0,
+          y: 20,
+          filter: 'blur(10px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1,
+        }
+      )
+
+      .to(
+        heroTitle.chars,
+        {
+          yPercent: 0,
+          rotateX: 0,
+          opacity: 1,
+          stagger: 0.018,
+          duration: 0.85,
+          ease: 'power4.out',
+        },
+        '-=0.4'
+      )
+
+      .to(
+        heroDesc.lines,
+        {
+          yPercent: 0,
+          opacity: 1,
+          stagger: 0.12,
+          duration: 1,
+        },
+        '-=1'
+      )
+
+      .fromTo(
+        '.hero-cta a',
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.92,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.12,
+          duration: 1,
+          ease: 'power4.out',
+        },
+        '-=0.7'
+      )
+
+      .fromTo(
+        '.hero-bottom',
+        {
+          opacity: 0,
+          y: 80,
+          scale: 0.96,
+          filter: 'blur(10px)',
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 1.8,
+          ease: 'expo.out',
+        },
+        '-=1'
+      );
+
+    // =========================
+    // ABOUT TITLE
+    // =========================
+
+    const aboutTitleSplit = new SplitText('.about-title', {
+      type: 'lines,words',
+    });
+
+    gsap.from(aboutTitleSplit.words, {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 70%',
+      },
+      yPercent: 120,
+      opacity: 0,
+      rotateZ: 2,
+      stagger: 0.04,
+      duration: 1.2,
+      ease: 'expo.out',
+    });
+
+    // =========================
+    // CONTACT TITLE
+    // =========================
+
+    const contactSplit = new SplitText('.contact-heading', {
+      type: 'lines,words',
+    });
+
+    gsap.from(contactSplit.words, {
+      scrollTrigger: {
+        trigger: '#contact',
+        start: 'top 75%',
+      },
+      opacity: 0,
+      yPercent: 120,
+      stagger: 0.05,
+      duration: 1.2,
+      ease: 'expo.out',
+    });
+
+    // =========================
+    // PROJECT TITLES
+    // =========================
+
+    gsap.utils.toArray('.project-title').forEach((title: any) => {
+      const split = new SplitText(title, {
+        type: 'chars',
+      });
+
+      gsap.from(split.chars, {
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 90%',
+        },
+        opacity: 0,
+        y: 40,
+        rotateX: -90,
+        stagger: 0.02,
+        duration: 0.8,
+        ease: 'power4.out',
+      });
+    });
+
+    // =========================
+    // STATS
+    // =========================
+
+    gsap.from('.stat-number', {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 65%',
+      },
+      y: 80,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 1.4,
+      ease: 'expo.out',
+    });
+
+    // =========================
+    // MAGNETIC HEADINGS
+    // =========================
+
+    gsap.utils.toArray<HTMLElement>('h2').forEach((heading) => {
+      heading.addEventListener('mousemove', (e) => {
+        const rect = heading.getBoundingClientRect();
+
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        gsap.to(heading, {
+          x: x * 0.03,
+          y: y * 0.03,
+          duration: 1,
+          ease: 'power3.out',
+        });
+      });
+
+      heading.addEventListener('mouseleave', () => {
+        gsap.to(heading, {
+          x: 0,
+          y: 0,
+          duration: 1.2,
+          ease: 'elastic.out(1, 0.4)',
+        });
+      });
+    });
+
+    // =========================
+    // SCROLL VELOCITY SKEW
+    // =========================
+
+    ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      onUpdate: (self) => {
+        const velocity = self.getVelocity();
+
+        gsap.to('.hero-title, h2', {
+          skewY: velocity * 0.001,
+          duration: 0.5,
+          ease: 'power3.out',
+          overwrite: true,
+        });
+      },
+    });
+
+    // =========================
+    // SECTION REVEALS
+    // =========================
+
+    ['about', 'skills', 'experience', 'projects', 'contact'].forEach(
+      (sectionId) => {
+        gsap.fromTo(
+          `#${sectionId} .section-content`,
+          {
+            opacity: 0,
+            y: 40,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: `#${sectionId}`,
+              start: 'top 75%',
+            },
+          }
+        );
+
+        ScrollTrigger.create({
+          trigger: `#${sectionId}`,
+          start: 'top 30%',
+          end: 'bottom 40%',
+          onEnter: () => setActiveSection(sectionId),
+          onEnterBack: () => setActiveSection(sectionId),
+        });
+      }
+    );
+
+    // =========================
+    // HOME TRACKER
+    // =========================
+
+    ScrollTrigger.create({
+      trigger: heroRef.current,
+      start: 'top top',
+      end: 'bottom 50%',
+      onEnter: () => setActiveSection('home'),
+      onEnterBack: () => setActiveSection('home'),
+    });
+
+    // =========================
+    // CLEANUP
+    // =========================
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.removeEventListener('click', handleAnchorClick as any);
+      });
+
+      ScrollTrigger.getAll().forEach((t: any) => t.kill());
+
+      lenis.destroy();
+    };
+  }, []);
   const navItems = [
     { id: 'home', label: 'Home', href: '#' },
     { id: 'about', label: 'About Me', href: '#about' },
@@ -298,6 +522,7 @@ export default function Home() {
           <h1 className="hero-title text-5xl sm:text-7xl lg:text-[5.5rem] leading-[1.1] sm:leading-[1.05] tracking-tight font-bold perspective-[1000px]">
             Michael <span className="text-white/40">Chinye</span>
           </h1>
+
           <p className="hero-desc text-base sm:text-[1.3rem] text-white/70 max-w-xl leading-relaxed">
             Frontend Engineer with 4+ years building high-performance web apps in React, TypeScript & Next.js for fintech, e-commerce & SaaS.
           </p>
@@ -331,12 +556,12 @@ export default function Home() {
               <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Crafting digital experiences that engage users and drive real business results.</p>
             </div>
             <div className="relative pl-6 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 lg:pl-16">
-              <div className="absolute left-0 lg:left-0 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
+              <div className="absolute left-0 lg:left-1 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
               <h3 className="text-xl sm:text-2xl font-bold mt-2">Performance</h3>
               <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Optimized high-performance applications for fintech, e-commerce & SaaS platforms.</p>
             </div>
             <div className="relative pl-6 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 lg:pl-16">
-              <div className="absolute left-0 lg:left-0 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
+              <div className="absolute left-1 lg:left-1 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
               <h3 className="text-xl sm:text-2xl font-bold mt-2">Design Systems</h3>
               <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Building scalable, reusable component libraries and intuitive user interfaces.</p>
             </div>
@@ -359,10 +584,10 @@ export default function Home() {
                 <p>I specialize in React, TypeScript, Next.js and modern design systems — turning complex fintech, e-commerce, and SaaS challenges into intuitive, production-ready experiences.</p>
                 <p className="text-white/60 text-base sm:text-lg italic">When I’m not coding, you’ll find me exploring new UI patterns, refining animations, or thinking about how to make digital products feel alive.</p>
               </div>
-              <div className="flex flex-wrap gap-8 sm:gap-12 pt-4">
-                <div><div className="text-3xl sm:text-4xl font-light text-white">4+</div><div className="text-[10px] sm:text-xs text-white/50 tracking-widest uppercase mt-1">YEARS EXPERIENCE</div></div>
-                <div><div className="text-3xl sm:text-4xl font-light text-white">6+</div><div className="text-[10px] sm:text-xs text-white/50 tracking-widest uppercase mt-1">PROJECTS SHIPPED</div></div>
-                <div><div className="text-3xl sm:text-4xl font-light text-white">∞</div><div className="text-[10px] sm:text-xs text-white/50 tracking-widest uppercase mt-1">CUPS OF COFFEE</div></div>
+              <div className=" flex flex-wrap gap-8 sm:gap-12 pt-4">
+                <div><div className="stat-number text-3xl sm:text-4xl font-light text-white">4+</div><div className="stat-label text-[10px] sm:text-xs text-white/50 tracking-widest uppercase mt-1">YEARS EXPERIENCE</div></div>
+                <div><div className="stat-number text-3xl sm:text-4xl font-light text-white">6+</div><div className="stat-label text-[10px] sm:text-xs text-white/50 tracking-widest uppercase mt-1">PROJECTS SHIPPED</div></div>
+                <div><div className="stat-number text-3xl sm:text-4xl font-light text-white">∞</div><div className="stat-label text-[10px] sm:text-xs text-white/50 tracking-widest uppercase mt-1">CUPS OF COFFEE</div></div>
               </div>
             </div>
             <div className="lg:col-span-5 relative order-1 lg:order-2 group">
@@ -495,8 +720,8 @@ export default function Home() {
             <span className="w-8 h-px bg-white/40"></span>
             <span className="text-xs sm:text-sm uppercase tracking-[1px] text-white/60 font-medium">CHAPTER 04 • SELECTED WORK</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20">Featured Projects</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-center">
+          <h2 className="project-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20">Featured Projects</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center">
             {projects.map((project, idx) => (
               <a
                 key={idx}
@@ -541,7 +766,7 @@ export default function Home() {
               <span className="text-xs sm:text-sm uppercase tracking-[2px] text-white/60 font-bold">CHAPTER 05 • CONNECT</span>
               <span className="w-8 h-px bg-white/40"></span>
             </div>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1] mb-10 text-white">Let’s build something <span className="text-white/30 italic">exceptional.</span></h2>
+            <h2 className="contact-heading text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1] mb-10 text-white">Let’s build something <span className="text-white/30 italic">exceptional.</span></h2>
             <p className="text-white/60 text-lg sm:text-xl max-w-xl mx-auto mb-16 leading-relaxed">Currently open to senior opportunities, collaborations, and high-impact freelance projects.</p>
 
             <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6 sm:p-10 lg:p-12 mx-auto max-w-2xl shadow-2xl">

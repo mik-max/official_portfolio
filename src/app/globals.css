@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.hero-line {
+  overflow: hidden;
+}
+
+.hero-title,
+.about-title,
+.contact-heading,
+.project-title {
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
