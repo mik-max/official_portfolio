@@ -205,20 +205,28 @@ export default function Home() {
     // =========================
 
     const aboutTitleSplit = new SplitText('.about-title', {
-      type: 'lines,words',
+      type: 'lines,chars',
+      linesClass: 'hero-line',
     });
 
-    gsap.from(aboutTitleSplit.words, {
+    gsap.set(aboutTitleSplit.chars, {
+      yPercent: 120,
+      rotateX: -90,
+      transformOrigin: '0% 50% -50',
+      opacity: 0,
+    });
+
+    gsap.to(aboutTitleSplit.chars, {
       scrollTrigger: {
         trigger: '#about',
-        start: 'top 70%',
+        start: 'top 75%',
       },
-      yPercent: 120,
-      opacity: 0,
-      rotateZ: 2,
-      stagger: 0.04,
-      duration: 1.2,
-      ease: 'expo.out',
+      yPercent: 0,
+      rotateX: 0,
+      opacity: 1,
+      stagger: 0.018,
+      duration: 0.85,
+      ease: 'power4.out',
     });
 
     // =========================
@@ -226,19 +234,28 @@ export default function Home() {
     // =========================
 
     const contactSplit = new SplitText('.contact-heading', {
-      type: 'lines,words',
+      type: 'lines,chars',
+      linesClass: 'hero-line',
     });
 
-    gsap.from(contactSplit.words, {
+    gsap.set(contactSplit.chars, {
+      yPercent: 120,
+      rotateX: -90,
+      transformOrigin: '0% 50% -50',
+      opacity: 0,
+    });
+
+    gsap.to(contactSplit.chars, {
       scrollTrigger: {
         trigger: '#contact',
-        start: 'top 75%',
+        start: 'top 80%',
       },
-      opacity: 0,
-      yPercent: 120,
-      stagger: 0.05,
-      duration: 1.2,
-      ease: 'expo.out',
+      yPercent: 0,
+      rotateX: 0,
+      opacity: 1,
+      stagger: 0.018,
+      duration: 0.85,
+      ease: 'power4.out',
     });
 
     // =========================
@@ -247,21 +264,57 @@ export default function Home() {
 
     gsap.utils.toArray('.project-title').forEach((title: any) => {
       const split = new SplitText(title, {
-        type: 'chars',
+        type: 'lines,chars',
+        linesClass: 'hero-line',
       });
 
-      gsap.from(split.chars, {
+      gsap.set(split.chars, {
+        yPercent: 120,
+        rotateX: -90,
+        transformOrigin: '0% 50% -50',
+        opacity: 0,
+      });
+
+      gsap.to(split.chars, {
         scrollTrigger: {
           trigger: title,
           start: 'top 90%',
         },
-        opacity: 0,
-        y: 40,
-        rotateX: -90,
-        stagger: 0.02,
-        duration: 0.8,
+        yPercent: 0,
+        rotateX: 0,
+        opacity: 1,
+        stagger: 0.018,
+        duration: 0.85,
         ease: 'power4.out',
       });
+    });
+    // Add same animation to Experience and Skills titles
+    ['#experience h2', '#skills h2'].forEach((selector) => {
+      const el = document.querySelector(selector);
+      if (el) {
+        const split = new SplitText(el, {
+          type: 'lines,chars',
+          linesClass: 'hero-line',
+        });
+        gsap.set(split.chars, {
+          yPercent: 120,
+          rotateX: -90,
+          transformOrigin: '0% 50% -50',
+          opacity: 0,
+        });
+        gsap.to(split.chars, {
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+          },
+          yPercent: 0,
+          rotateX: 0,
+          opacity: 1,
+          stagger: 0.018,
+          duration: 0.85,
+          ease: 'power4.out',
+        });
+      }
     });
 
     // =========================
@@ -320,7 +373,7 @@ export default function Home() {
         const velocity = self.getVelocity();
 
         gsap.to('.hero-title, h2', {
-          skewY: velocity * 0.001,
+          skewY: velocity * 0.0005,
           duration: 0.5,
           ease: 'power3.out',
           overwrite: true,
@@ -618,7 +671,7 @@ export default function Home() {
             <span className="w-8 h-px bg-white/40"></span>
             <span className="text-xs sm:text-sm uppercase tracking-[1px] text-white/60 font-medium">CHAPTER 02 • EXPERTISE</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-16">Tools & Technologies</h2>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-16 perspective-[1000px]">Tools & Technologies</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-10">
             <div className="group">
               <div className="text-orange-400 text-xs sm:text-sm font-bold tracking-[2px] mb-6 uppercase">FRONTEND</div>
@@ -663,7 +716,7 @@ export default function Home() {
             <span className="w-8 h-px bg-white/40"></span>
             <span className="text-xs sm:text-sm uppercase tracking-[1px] text-white/60 font-medium">CHAPTER 03 • JOURNEY</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20">Professional Experience</h2>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20 perspective-[1000px]">Professional Experience</h2>
           <div className="relative max-w-5xl mx-auto">
             <div className="absolute left-4 sm:left-6 lg:left-8 top-6 bottom-6 w-px bg-white/10"></div>
 
@@ -720,7 +773,7 @@ export default function Home() {
             <span className="w-8 h-px bg-white/40"></span>
             <span className="text-xs sm:text-sm uppercase tracking-[1px] text-white/60 font-medium">CHAPTER 04 • SELECTED WORK</span>
           </div>
-          <h2 className="project-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20">Featured Projects</h2>
+          <h2 className="project-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20 perspective-[1000px]">Featured Projects</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center">
             {projects.map((project, idx) => (
               <a
@@ -766,7 +819,7 @@ export default function Home() {
               <span className="text-xs sm:text-sm uppercase tracking-[2px] text-white/60 font-bold">CHAPTER 05 • CONNECT</span>
               <span className="w-8 h-px bg-white/40"></span>
             </div>
-            <h2 className="contact-heading text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1] mb-10 text-white">Let’s build something <span className="text-white/30 italic">exceptional.</span></h2>
+            <h2 className="contact-heading text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1] mb-10 text-white perspective-[1000px]">Let’s build something <span className="text-white/30 italic">exceptional.</span></h2>
             <p className="text-white/60 text-lg sm:text-xl max-w-xl mx-auto mb-16 leading-relaxed">Currently open to senior opportunities, collaborations, and high-impact freelance projects.</p>
 
             <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-6 sm:p-10 lg:p-12 mx-auto max-w-2xl shadow-2xl">
