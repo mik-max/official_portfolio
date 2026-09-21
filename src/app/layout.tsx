@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Michael Chinye | Frontend Engineer | React & Next.js Specialist",
-  description: "Portfolio of Michael Chinye, a Frontend Engineer with 4+ years of experience building high-performance web applications in React, TypeScript, and Next.js for fintech, e-commerce, and SaaS.",
-  keywords: ["Michael Chinye", "Frontend Engineer", "React Developer", "Next.js Developer", "TypeScript", "Portfolio", "Web Development", "Lagos", "Nigeria", "GSAP Animations"],
+  title: "Michael Chinye | Senior Frontend Engineer | React & Next.js Specialist",
+  description: "Portfolio of Michael Chinye, a Senior Frontend Engineer with 4+ years of experience building high-performance web applications in React, TypeScript, and Next.js for fintech, e-commerce, and SaaS.",
+  keywords: ["Michael Chinye", "Senior Frontend Engineer", "React Developer", "Next.js Developer", "TypeScript", "Portfolio", "Web Development", "Lagos", "Nigeria", "GSAP Animations"],
   authors: [{ name: "Michael Chinye" }],
   creator: "Michael Chinye",
   metadataBase: new URL("https://www.mikecodes.online"),
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Michael Chinye | Frontend Engineer",
+    title: "Michael Chinye | Senior Frontend Engineer",
     description: "Crafting digital experiences that engage users and drive real business results.",
     url: "https://www.mikecodes.online",
     siteName: "Michael Chinye Portfolio",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         url: "/images/about-photo.jpg",
         width: 1200,
         height: 630,
-        alt: "Michael Chinye - Frontend Engineer",
+        alt: "Michael Chinye - Senior Frontend Engineer",
       },
     ],
     locale: "en_US",
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Michael Chinye | Frontend Engineer",
-    description: "Frontend Engineer specializing in React, TypeScript, and Next.js.",
+    title: "Michael Chinye | Senior Frontend Engineer",
+    description: "Senior Frontend Engineer specializing in React, TypeScript, and Next.js.",
     creator: "@chinyemichael",
     images: ["/images/about-photo.jpg"],
   },

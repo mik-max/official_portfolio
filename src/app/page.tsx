@@ -337,8 +337,14 @@ export default function Home() {
     // MAGNETIC HEADINGS
     // =========================
 
+    const magneticHeadings: {
+      heading: HTMLElement;
+      onMove: (e: MouseEvent) => void;
+      onLeave: () => void;
+    }[] = [];
+
     gsap.utils.toArray<HTMLElement>('h2').forEach((heading) => {
-      heading.addEventListener('mousemove', (e) => {
+      const onMove = (e: MouseEvent) => {
         const rect = heading.getBoundingClientRect();
 
         const x = e.clientX - rect.left - rect.width / 2;
@@ -350,16 +356,20 @@ export default function Home() {
           duration: 1,
           ease: 'power3.out',
         });
-      });
+      };
 
-      heading.addEventListener('mouseleave', () => {
+      const onLeave = () => {
         gsap.to(heading, {
           x: 0,
           y: 0,
           duration: 1.2,
           ease: 'elastic.out(1, 0.4)',
         });
-      });
+      };
+
+      heading.addEventListener('mousemove', onMove);
+      heading.addEventListener('mouseleave', onLeave);
+      magneticHeadings.push({ heading, onMove, onLeave });
     });
 
     // =========================
@@ -438,6 +448,11 @@ export default function Home() {
         anchor.removeEventListener('click', handleAnchorClick as any);
       });
 
+      magneticHeadings.forEach(({ heading, onMove, onLeave }) => {
+        heading.removeEventListener('mousemove', onMove);
+        heading.removeEventListener('mouseleave', onLeave);
+      });
+
       ScrollTrigger.getAll().forEach((t: any) => t.kill());
 
       lenis.destroy();
@@ -487,6 +502,13 @@ export default function Home() {
       url: "https://mainstack.com/products/invoicing",
       image: "/images/project-thumbnails/invoice.png",
       tags: ["TypeScript", "Next.js", "Tailwind"]
+    },
+    {
+      title: "Mecitac Nigeria Ltd",
+      description: "Corporate site for a software, cloud, AI and energy-systems consulting firm — built with a service-driven layout and clear conversion paths.",
+      url: "https://www.mecitacng.com/",
+      image: "/images/project-thumbnails/mecitac.jpg",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS"]
     }
   ];
 
@@ -513,7 +535,7 @@ export default function Home() {
       {/* Full Background Cinematic Image */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/images/hero-bg.png"
+          src="/images/hero-bg.jpg"
           alt="Cinematic Background"
           fill
           className="object-cover object-right md:object-center"
@@ -570,14 +592,14 @@ export default function Home() {
       <section ref={heroRef} id="home" className="relative z-20 min-h-dvh  h-auto flex flex-col justify-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-24 pb-40 sm:pb-45 overflow-hidden">
         <div className="max-w-4xl space-y-6 sm:space-y-8 relative z-20">
           <div className="hero-badge inline-flex items-center px-4 py-1.5 sm:px-5 sm:py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-xs sm:text-sm font-medium text-white/80">
-            Frontend Engineer • 4+ Years
+            Senior Frontend Engineer • 4+ Years
           </div>
           <h1 className="hero-title text-5xl sm:text-7xl lg:text-[5.5rem] leading-[1.1] sm:leading-[1.05] tracking-tight font-bold perspective-[1000px]">
             Michael <span className="text-white/40">Chinye</span>
           </h1>
 
           <p className="hero-desc text-base sm:text-[1.3rem] text-white/70 max-w-xl leading-relaxed">
-            Frontend Engineer with 4+ years building high-performance web apps in React, TypeScript & Next.js for fintech, e-commerce & SaaS.
+            Senior Frontend Engineer with 4+ years building high-performance web apps in React, TypeScript & Next.js for fintech, e-commerce & SaaS.
           </p>
           <div className="hero-cta flex flex-wrap gap-4 sm:gap-5 pt-2 sm:pt-4">
             <a
@@ -605,8 +627,8 @@ export default function Home() {
           <div className="rounded-3xl sm:rounded-4xl bg-linear-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 p-6 sm:p-8 grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 shadow-2xl">
             <div className="relative pl-6">
               <div className="absolute left-0 top-1 w-4 h-4 border-t border-l border-white/40" />
-              <h3 className="text-xl sm:text-2xl font-bold mt-2">©2026</h3>
-              <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Crafting digital experiences that engage users and drive real business results.</p>
+              <h3 className="text-xl sm:text-2xl font-bold mt-2">Collaboration</h3>
+              <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Partnering closely with product, design and engineering teams to ship features that actually move the needle.</p>
             </div>
             <div className="relative pl-6 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 lg:pl-16">
               <div className="absolute left-0 lg:left-1 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
@@ -633,7 +655,7 @@ export default function Home() {
               </div>
               <h2 className="about-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight perspective-[1000px]">Hi, I’m Michael.</h2>
               <div className="max-w-2xl text-white/80 text-base sm:text-lg lg:text-[1.35rem] leading-relaxed space-y-6">
-                <p>Frontend Engineer with 4+ years crafting scalable, high-performance web applications.</p>
+                <p>Senior Frontend Engineer with 4+ years crafting scalable, high-performance web applications.</p>
                 <p>I specialize in React, TypeScript, Next.js and modern design systems — turning complex fintech, e-commerce, and SaaS challenges into intuitive, production-ready experiences.</p>
                 <p className="text-white/60 text-base sm:text-lg italic">When I’m not coding, you’ll find me exploring new UI patterns, refining animations, or thinking about how to make digital products feel alive.</p>
               </div>
@@ -651,7 +673,6 @@ export default function Home() {
                   alt="Michael Chinye"
                   fill
                   className="object-cover transition-all duration-700"
-                  quality={100}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-transparent" />
@@ -676,7 +697,7 @@ export default function Home() {
             <div className="group">
               <div className="text-orange-400 text-xs sm:text-sm font-bold tracking-[2px] mb-6 uppercase">FRONTEND</div>
               <div className="flex flex-wrap gap-2.5 sm:gap-3">
-                {['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'GSAP', 'HTML5', 'CSS3'].map((skill) => (
+                {['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Chakra UI', 'GSAP', 'HTML5', 'CSS3'].map((skill) => (
                   <div key={skill} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="px-4 py-2 sm:px-6 sm:py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 rounded-full text-white/80 text-xs sm:text-sm font-medium transition-all">{skill}</div>
                 ))}
               </div>
@@ -684,7 +705,7 @@ export default function Home() {
             <div className="group">
               <div className="text-emerald-400 text-xs sm:text-sm font-bold tracking-[2px] mb-6 uppercase">BACKEND & APIS</div>
               <div className="flex flex-wrap gap-2.5 sm:gap-3">
-                {['Node.js', 'Express.js', 'REST APIs'].map((skill) => (
+                {['Node.js', 'Express.js', 'NestJS', 'REST APIs', 'OpenAPI/Swagger'].map((skill) => (
                   <div key={skill} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="px-4 py-2 sm:px-6 sm:py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 rounded-full text-white/80 text-xs sm:text-sm font-medium transition-all">{skill}</div>
                 ))}
               </div>
@@ -698,9 +719,9 @@ export default function Home() {
               </div>
             </div>
             <div className="group">
-              <div className="text-white/50 text-xs sm:text-sm font-bold tracking-[2px] mb-6 uppercase">CORE EXPERTISE</div>
+              <div className="text-white/50 text-xs sm:text-sm font-bold tracking-[2px] mb-6 uppercase">CORE EXPERTISE & TOOLING</div>
               <div className="flex flex-wrap gap-2.5 sm:gap-3">
-                {['Architecture', 'Systems', 'Optimisation', 'Responsiveness', 'Accessibility'].map((skill) => (
+                {['Architecture', 'Systems', 'Optimisation', 'Responsiveness', 'Accessibility', 'Jest', 'React Testing Library', 'Git/GitHub', 'Webpack/Vite'].map((skill) => (
                   <div key={skill} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="px-4 py-2 sm:px-6 sm:py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 rounded-full text-white/80 text-xs sm:text-sm font-medium transition-all">{skill}</div>
                 ))}
               </div>
@@ -723,6 +744,28 @@ export default function Home() {
             <div className="relative mb-16 sm:mb-20">
               <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
                 <div className="md:w-32 flex-shrink-0 relative z-10">
+                  <div className="text-xs sm:text-sm font-bold text-white/40 md:text-right bg-black pr-4 inline-block md:block">2026 — PRESENT</div>
+                </div>
+                <div className="flex-1">
+                  <div className="bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-10 hover:border-white/30 transition-all hover:translate-x-1 shadow-xl">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-6 gap-2">
+                      <h3 className="text-2xl sm:text-3xl font-bold text-white">Full-Stack Engineer (Contract)</h3>
+                      <span className="text-emerald-400 text-sm font-bold tracking-widest uppercase">SkytLabs</span>
+                    </div>
+                    <ul className="space-y-4 text-white/70 text-base sm:text-lg leading-relaxed">
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">01</span><span>Designed and built a production NestJS/TypeScript backend for a field data-collection platform, from schema design through deployment.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">02</span><span>Architected a ports-and-adapters API with 21 REST endpoints across 11 modules, backed by 160+ automated tests and typed OpenAPI/Swagger contracts.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">03</span><span>Built secure agent authentication (password + passwordless OTP, device-binding, session/refresh tokens) and a mirror-sync job queue bridging two independent SQL Server databases.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">04</span><span>Integrated 4 third-party services via a config-driven adapter pattern; identified and remediated a plaintext credential-logging vulnerability.</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative mb-16 sm:mb-20">
+              <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
+                <div className="md:w-32 flex-shrink-0 relative z-10">
                   <div className="text-xs sm:text-sm font-bold text-white/40 md:text-right bg-black pr-4 inline-block md:block">JUN 2023 — MAR 2026</div>
                 </div>
                 <div className="flex-1">
@@ -732,10 +775,12 @@ export default function Home() {
                       <span className="text-emerald-400 text-sm font-bold tracking-widest uppercase">Mainstack</span>
                     </div>
                     <ul className="space-y-4 text-white/70 text-base sm:text-lg leading-relaxed">
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">01</span><span>Developed discount management system and multi-channel payout system.</span></li>
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">02</span><span>Built contact card with Google Contacts integration and automated email system.</span></li>
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">03</span><span>Created dynamic blog platform using Strapi CMS and refactored legacy codebase.</span></li>
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">04</span><span>Contributed to scalable design system and optimized 6+ applications.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">01</span><span>Built the Mainstack Referral Program and multi-currency Ambassador payout system, contributing to 20% growth in merchant referrals and 15% of new sign-ups via affiliate channels.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">02</span><span>Developed a multi-channel payout system across 4 currencies, processing payouts for 1,000+ merchants with a 30% reduction in failed transactions.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">03</span><span>Built the discount management system used by 60% of the active merchant base, and shipped a dynamic blog platform on Strapi CMS.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">04</span><span>Refactored the legacy codebase into a modular, component-driven architecture, cutting feature build time by 15% and production bugs by 25%.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">05</span><span>Optimized 6+ applications for Core Web Vitals, SEO and WCAG accessibility, improving average page load time by 30%.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">06</span><span>Contributed to a scalable design system adopted across 6 products, cutting design-to-dev handoff time by 40%.</span></li>
                     </ul>
                   </div>
                 </div>
@@ -754,9 +799,9 @@ export default function Home() {
                       <span className="text-emerald-400 text-sm font-bold tracking-widest uppercase">Skyt Technologies</span>
                     </div>
                     <ul className="space-y-4 text-white/70 text-base sm:text-lg leading-relaxed">
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">01</span><span>Built reusable UI component library in React.</span></li>
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">02</span><span>Developed logistics web application connecting transporters and clients.</span></li>
-                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">03</span><span>Integrated third-party REST APIs for real-time data flow.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">01</span><span>Built a reusable React component library adopted across the product, cutting new-feature development time by 10%.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">02</span><span>Developed a logistics web application connecting transporters and clients, supporting 100+ monthly bookings.</span></li>
+                      <li className="flex gap-4"><span className="text-white/30 mt-1.5 flex-shrink-0 text-xs">03</span><span>Integrated third-party REST APIs for real-time data flow between transporters, clients and dispatch systems.</span></li>
                     </ul>
                   </div>
                 </div>
@@ -854,6 +899,16 @@ export default function Home() {
                   </div>
                 </a>
                 <div className="h-px bg-white/10"></div>
+                <a href="https://github.com/mik-max" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="block group">
+                  <div className="flex items-center justify-between text-left">
+                    <div>
+                      <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2 font-bold">GITHUB</div>
+                      <div className="text-lg sm:text-2xl font-bold text-white group-hover:text-amber-400 transition-colors break-all sm:break-normal">github.com/mik-max</div>
+                    </div>
+                    <span className="text-2xl sm:text-4xl text-white/20 group-hover:text-white group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300">↗</span>
+                  </div>
+                </a>
+                <div className="h-px bg-white/10"></div>
                 <div className="flex items-center justify-between text-left">
                   <div>
                     <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2 font-bold">CURRENT LOCATION</div>
@@ -873,16 +928,21 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-white/30">
             <div className="font-bold tracking-tight text-white/50 text-lg">Michael Chinye</div>
             <div className="hidden md:block w-px h-4 bg-white/10"></div>
-            <div className="font-medium">Frontend Engineer • Lagos, Nigeria</div>
+            <div className="font-medium">Senior Frontend Engineer • Lagos, Nigeria</div>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-white/40 uppercase tracking-[2px] font-bold text-[10px]">
             {navItems.filter(i => i.id !== 'home').map(item => (
               <a key={item.id} href={item.href} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="hover:text-white transition-colors">{item.label}</a>
             ))}
           </div>
-          <a href="https://linkedin.com/in/chinyemichael" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="flex items-center gap-2 text-white/40 hover:text-white transition-all font-bold tracking-widest uppercase text-xs">
-            <span>LinkedIn</span><span className="text-xl">↗</span>
-          </a>
+          <div className="flex items-center gap-6 sm:gap-8">
+            <a href="https://github.com/mik-max" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="flex items-center gap-2 text-white/40 hover:text-white transition-all font-bold tracking-widest uppercase text-xs">
+              <span>GitHub</span><span className="text-xl">↗</span>
+            </a>
+            <a href="https://linkedin.com/in/chinyemichael" target="_blank" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="flex items-center gap-2 text-white/40 hover:text-white transition-all font-bold tracking-widest uppercase text-xs">
+              <span>LinkedIn</span><span className="text-xl">↗</span>
+            </a>
+          </div>
         </div>
       </footer>
     </main>
