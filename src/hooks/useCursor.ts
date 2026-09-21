@@ -31,11 +31,11 @@ export function useCursor() {
   }, []);
 
   const handleMouseEnter = () => {
-    gsap.to(cursorOuterRef.current, { scale: 2, backgroundColor: 'rgba(255, 255, 255, 0.1)', border: '1px solid white', duration: 0.3 });
+    gsap.to(cursorOuterRef.current, { scale: 2, backgroundColor: 'rgba(27, 25, 18, 0.08)', border: '1px solid rgba(27, 25, 18, 0.8)', duration: 0.3 });
   };
 
   const handleMouseLeave = () => {
-    gsap.to(cursorOuterRef.current, { scale: 1, backgroundColor: 'transparent', border: '1px solid rgba(255, 255, 255, 0.5)', duration: 0.3 });
+    gsap.to(cursorOuterRef.current, { scale: 1, backgroundColor: 'transparent', border: '1px solid rgba(27, 25, 18, 0.4)', duration: 0.3 });
   };
 
   return { cursorOuterRef, cursorInnerRef, handleMouseEnter, handleMouseLeave };

@@ -10,11 +10,11 @@ export function CustomCursor({ outerRef, innerRef }: CustomCursorProps) {
     <>
       <div
         ref={outerRef}
-        className="fixed top-0 left-0 w-10 h-10 border border-white/50 rounded-full pointer-events-none z-9999 -translate-x-1/2 -translate-y-1/2 hidden lg:block"
+        className="fixed top-0 left-0 w-10 h-10 border border-ink/40 rounded-full pointer-events-none z-9999 -translate-x-1/2 -translate-y-1/2 hidden lg:block"
       />
       <div
         ref={innerRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-9999 -translate-x-1/2 -translate-y-1/2 hidden lg:block"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-ink rounded-full pointer-events-none z-9999 -translate-x-1/2 -translate-y-1/2 hidden lg:block"
       />
     </>
   );

@@ -6,60 +6,107 @@ type HeroProps = {
   onMouseLeave: () => void;
 };
 
+const stats = [
+  { value: '1,000+', label: 'Merchants served' },
+  { value: '20%', label: 'Referral growth' },
+  { value: '160+', label: 'Tests shipped' },
+  { value: '4+', label: 'Years experience' },
+];
+
+const bars = [
+  { height: '40%', accent: false },
+  { height: '65%', accent: false },
+  { height: '50%', accent: false },
+  { height: '85%', accent: false },
+  { height: '60%', accent: false },
+  { height: '100%', accent: true },
+];
+
 export function Hero({ heroRef, onMouseEnter, onMouseLeave }: HeroProps) {
   return (
-    <section ref={heroRef} id="home" className="relative z-20 min-h-dvh  h-auto flex flex-col justify-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-24 pb-40 sm:pb-45 overflow-hidden">
-      <div className="max-w-4xl space-y-6 sm:space-y-8 relative z-20">
-        <div className="hero-badge inline-flex items-center px-4 py-1.5 sm:px-5 sm:py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-xs sm:text-sm font-medium text-white/80">
-          Senior Frontend Engineer • 4+ Years
-        </div>
-        <h1 className="hero-title text-5xl sm:text-7xl lg:text-[5.5rem] leading-[1.1] sm:leading-[1.05] tracking-tight font-bold perspective-[1000px]">
-          Michael <span className="text-white/40">Chinye</span>
-        </h1>
+    <section ref={heroRef} id="home" className="relative min-h-dvh h-auto flex items-center px-6 lg:px-16 max-w-[1400px] mx-auto pt-28 pb-20">
+      <div className="w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
 
-        <p className="hero-desc text-base sm:text-[1.3rem] text-white/70 max-w-xl leading-relaxed">
-          Senior Frontend Engineer with 4+ years building high-performance web apps in React, TypeScript & Next.js for fintech, e-commerce & SaaS.
-        </p>
-        <div className="hero-cta flex flex-wrap gap-4 sm:gap-5 pt-2 sm:pt-4">
-          <a
-            href="#projects"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            className="px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black text-sm sm:text-base font-medium rounded-full flex items-center gap-3 hover:scale-105 transition-transform"
-          >
-            View My Work ↗
-          </a>
-          <a
-            href="/assets/resume.pdf"
-            download
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            className="px-6 py-3.5 sm:px-8 sm:py-4 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/10 text-white text-sm sm:text-base font-medium rounded-full flex items-center gap-3 transition-colors"
-          >
-            Download CV ↓
-          </a>
-        </div>
-      </div>
+        <div className="flex-1 max-w-xl space-y-7">
+          <div className="hero-badge flex flex-wrap gap-2">
+            <span className="px-3.5 py-1.5 text-xs sm:text-sm rounded-full border border-ink/15 text-ink/60">Senior Frontend Engineer</span>
+            <span className="px-3.5 py-1.5 text-xs sm:text-sm rounded-full border border-ink/15 text-ink/60">Lagos, Nigeria</span>
+          </div>
 
-      {/* Hero Bottom Info */}
-      <div className="hero-bottom mt-16 sm:mt-20 lg:absolute lg:bottom-8 2xl:bottom-12 lg:left-20 lg:right-20 z-20 relative">
-        <div className="rounded-3xl sm:rounded-4xl bg-linear-to-b from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 p-6 sm:p-8 grid md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 shadow-2xl">
-          <div className="relative pl-6">
-            <div className="absolute left-0 top-1 w-4 h-4 border-t border-l border-white/40" />
-            <h3 className="text-xl sm:text-2xl font-bold mt-2">Collaboration</h3>
-            <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Partnering closely with product, design and engineering teams to ship features that actually move the needle.</p>
+          <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-normal perspective-[1000px]">
+            Interfaces that carry <em className="italic">real weight.</em>
+          </h1>
+
+          <p className="hero-desc text-base sm:text-lg text-ink/60 leading-relaxed">
+            4+ years building fintech and SaaS products used by thousands. React interfaces, NestJS backends, shipped end to end.
+          </p>
+
+          <div className="hero-cta flex flex-wrap gap-4 pt-2">
+            <a
+              href="#projects"
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              className="px-7 py-3.5 bg-accent text-paper text-sm sm:text-base font-medium rounded-full hover:bg-accent/90 transition-colors"
+            >
+              View the work ↗
+            </a>
+            <a
+              href="/assets/resume.pdf"
+              download
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              className="px-7 py-3.5 border border-ink/20 text-ink text-sm sm:text-base font-medium rounded-full hover:bg-ink/5 transition-colors"
+            >
+              Download résumé ↓
+            </a>
           </div>
-          <div className="relative pl-6 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 lg:pl-16">
-            <div className="absolute left-0 lg:left-1 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
-            <h3 className="text-xl sm:text-2xl font-bold mt-2">Performance</h3>
-            <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Optimized high-performance applications for fintech, e-commerce & SaaS platforms.</p>
-          </div>
-          <div className="relative pl-6 border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12 lg:pl-16">
-            <div className="absolute left-1 lg:left-1 top-9 md:top-1 w-4 h-4 border-t border-l border-white/40" />
-            <h3 className="text-xl sm:text-2xl font-bold mt-2">Design Systems</h3>
-            <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-[240px]">Building scalable, reusable component libraries and intuitive user interfaces.</p>
+
+          <div className="hero-bottom flex flex-wrap gap-8 pt-6 border-t border-ink/10">
+            {stats.map((s) => (
+              <div key={s.label} className="flex flex-col gap-1">
+                <span className="font-mono text-xl sm:text-2xl font-bold text-accent">{s.value}</span>
+                <span className="text-xs text-ink/50">{s.label}</span>
+              </div>
+            ))}
           </div>
         </div>
+
+        <div className="flex-1 w-full max-w-lg flex flex-col gap-3.5">
+          <div
+            className="relative h-[420px] sm:h-[480px] rounded-2xl border border-ink/10 bg-paper-raised overflow-hidden p-8 sm:p-10"
+            style={{
+              backgroundImage:
+                'repeating-linear-gradient(rgba(27,25,18,0.05) 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, rgba(27,25,18,0.05) 0 1px, transparent 1px 40px)',
+            }}
+          >
+            <div className="absolute top-16 left-10 w-52 h-44 bg-accent/8 rounded-xl -rotate-3" />
+            <div className="absolute inset-8 top-12 rounded-xl bg-paper-raised border border-ink/10 shadow-xl p-5 flex flex-col gap-4">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="h-2 w-1/3 bg-ink/10 rounded ml-2" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="h-2.5 w-[85%] bg-ink/10 rounded" />
+                <span className="h-2.5 w-[65%] bg-ink/10 rounded" />
+                <span className="h-2.5 w-[40%] bg-accent rounded" />
+              </div>
+              <div className="flex items-end gap-2 flex-grow">
+                {bars.map((bar, i) => (
+                  <div
+                    key={i}
+                    className={`flex-1 rounded-t-sm ${bar.accent ? 'bg-accent' : 'bg-accent/8'}`}
+                    style={{ height: bar.height }}
+                  />
+                ))}
+              </div>
+            </div>
+            <span className="absolute bottom-6 right-6 w-3.5 h-3.5 rounded-full border-2 border-accent" />
+          </div>
+          <span className="font-mono text-xs text-ink/40 self-end">A system, not a screenshot.</span>
+        </div>
+
       </div>
     </section>
   );

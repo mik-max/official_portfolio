@@ -6,7 +6,6 @@ import { usePortfolioAnimations } from '@/hooks/usePortfolioAnimations';
 import { navItems } from '@/data/nav';
 import { projects } from '@/data/projects';
 import { CustomCursor } from '@/components/CustomCursor';
-import { CinematicBackground } from '@/components/CinematicBackground';
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
@@ -24,9 +23,8 @@ export default function Home() {
   usePortfolioAnimations(heroRef, setActiveSection);
 
   return (
-    <main className="bg-black text-white min-h-screen overflow-x-hidden font-sans selection:bg-white selection:text-black font-medium">
+    <main className="bg-paper text-ink min-h-screen overflow-x-hidden font-sans selection:bg-accent selection:text-paper font-medium">
       <CustomCursor outerRef={cursorOuterRef} innerRef={cursorInnerRef} />
-      <CinematicBackground />
       <Navbar
         navItems={navItems}
         activeSection={activeSection}
