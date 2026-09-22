@@ -8,31 +8,19 @@ export function Skills() {
           <span className="font-mono text-sm text-ink/65">02</span>
           <span className="text-sm font-medium text-ink/65">Skills</span>
         </div>
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-12 sm:mb-16">Tools &amp; technologies</h2>
-
-        <div className="rounded-2xl bg-ink overflow-hidden shadow-[0_24px_60px_rgba(27,25,18,0.14)] max-w-3xl">
-          <div className="flex items-center gap-1.5 px-4 py-3 border-b border-paper/8">
-            <span className="w-2 h-2 rounded-full bg-paper/20" />
-            <span className="w-2 h-2 rounded-full bg-paper/20" />
-            <span className="w-2 h-2 rounded-full bg-paper/20" />
-            <span className="font-mono text-[11px] text-paper/55 ml-2">stack.json</span>
-          </div>
-          <div className="font-mono text-sm sm:text-[15px] leading-loose px-6 sm:px-8 py-7 sm:py-8">
-            <div className="text-paper/40">{'{'}</div>
-            {skillCategories.map((category) => (
-              <div key={category.key} className="pl-6 flex flex-wrap items-baseline gap-x-1 gap-y-1">
-                <span className="text-accent-light">&quot;{category.key}&quot;</span>
-                <span className="text-paper/50">: [</span>
-                {category.skills.map((skill, i) => (
-                  <span key={skill} className="text-paper">
-                    &quot;{skill}&quot;{i < category.skills.length - 1 && <span className="text-paper/50">,</span>}
-                  </span>
-                ))}
-                <span className="text-paper/50">],</span>
-              </div>
-            ))}
-            <div className="text-paper/40">{'}'}</div>
-          </div>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-14 sm:mb-16">Tools &amp; technologies</h2>
+        <div className="max-w-3xl">
+          {skillCategories.map((category) => (
+            <div
+              key={category.label}
+              className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-10 py-7 sm:py-8 border-t border-ink/10 first:border-t-0"
+            >
+              <div className="sm:w-44 flex-shrink-0 text-sm font-medium text-ink/65">{category.label}</div>
+              <p className="font-mono text-base sm:text-lg text-ink/85 leading-relaxed">
+                {category.skills.join(', ')}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
