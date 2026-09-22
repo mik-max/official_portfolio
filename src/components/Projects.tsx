@@ -13,7 +13,7 @@ export function Projects({ projects }: ProjectsProps) {
           <span className="font-mono text-sm text-ink/65">04</span>
           <span className="text-sm font-medium text-ink/65">Selected work</span>
         </div>
-        <h2 className="project-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-20">Featured projects</h2>
+        <h2 className="project-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-20">Featured <span className="text-accent">projects</span></h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center">
           {projects.map((project, idx) => (
             <a

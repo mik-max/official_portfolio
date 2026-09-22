@@ -8,15 +8,17 @@ const stats = [
 
 export function About() {
   return (
-    <section id="about" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper-raised">
-      <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
+    <section id="about" className="relative py-20 sm:py-28 bg-paper-raised">
+      {/* Experimental: soft blend from Hero's paper into this section's white, instead of a hard border */}
+      <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-40 sm:h-56 bg-linear-to-b from-paper to-transparent pointer-events-none" />
+      <div className="section-content relative max-w-[1400px] mx-auto px-6 lg:px-20">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
             <div className="flex items-baseline gap-2.5">
               <span className="font-mono text-sm text-ink/65">01</span>
               <span className="text-sm font-medium text-ink/65">About</span>
             </div>
-            <h2 className="about-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Hi, I&apos;m Michael.</h2>
+            <h2 className="about-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Hi, I&apos;m <span className="text-accent">Michael.</span></h2>
             <div className="max-w-2xl text-ink/70 text-base sm:text-lg lg:text-[1.35rem] leading-relaxed space-y-6">
               <p>Senior Frontend Engineer with 4+ years crafting scalable, high-performance web applications.</p>
               <p>I specialize in React, TypeScript, Next.js and modern design systems, turning complex fintech, e-commerce and SaaS challenges into intuitive, production-ready experiences.</p>

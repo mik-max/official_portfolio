@@ -12,12 +12,8 @@ const buildLines = [
 
 export function Hero({ heroRef }: HeroProps) {
   return (
-    <section ref={heroRef} id="home" className="relative min-h-dvh h-auto flex items-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-28 pb-20 overflow-hidden">
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 translate-x-1/3 translate-y-1/3 w-70 h-70 sm:w-110 sm:h-110 rounded-full border border-accent/20 pointer-events-none z-0"
-      />
-      <div className="relative z-10 w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+    <section ref={heroRef} id="home" className="relative min-h-dvh h-auto flex items-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-28 pb-20">
+      <div className="w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
 
         <div className="flex-1 max-w-xl space-y-7">
           <div className="hero-badge flex flex-wrap gap-2">

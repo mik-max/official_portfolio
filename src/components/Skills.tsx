@@ -8,7 +8,7 @@ export function Skills() {
           <span className="font-mono text-sm text-ink/65">02</span>
           <span className="text-sm font-medium text-ink/65">Skills</span>
         </div>
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-14 sm:mb-16">Tools &amp; technologies</h2>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-14 sm:mb-16">Tools &amp; <span className="text-accent">technologies</span></h2>
         <div className="max-w-3xl">
           {skillCategories.map((category) => (
             <div

@@ -8,7 +8,7 @@ export function Experience() {
           <span className="font-mono text-sm text-ink/65">03</span>
           <span className="text-sm font-medium text-ink/65">Experience</span>
         </div>
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-20">Proof, not adjectives.</h2>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-20"><span className="text-accent">Proof,</span> not adjectives.</h2>
         <div className="relative max-w-5xl mx-auto">
           <div className="absolute left-4 sm:left-6 lg:left-8 top-6 bottom-6 w-px bg-ink/10"></div>
 
