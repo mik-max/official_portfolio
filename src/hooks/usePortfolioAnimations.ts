@@ -280,17 +280,21 @@ export function usePortfolioAnimations(
     // STATS
     // =========================
 
-    gsap.from('.stat-number', {
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top 65%',
-      },
-      y: 80,
-      opacity: 0,
-      stagger: 0.15,
-      duration: 1.4,
-      ease: 'expo.out',
-    });
+    gsap.fromTo(
+      '.stat-number',
+      { y: 80, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '#about',
+          start: 'top 65%',
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.15,
+        duration: 1.4,
+        ease: 'expo.out',
+      }
+    );
 
     // =========================
     // MAGNETIC HEADINGS

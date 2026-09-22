@@ -3,6 +3,7 @@ export type ExperienceEntry = {
   title: string;
   company: string;
   bullets: string[];
+  highlight: { value: string; label: string };
 };
 
 export const experience: ExperienceEntry[] = [
@@ -16,6 +17,7 @@ export const experience: ExperienceEntry[] = [
       'Built secure agent authentication (password + passwordless OTP, device-binding, session/refresh tokens) and a mirror-sync job queue bridging two independent SQL Server databases.',
       'Integrated 4 third-party services via a config-driven adapter pattern; identified and remediated a plaintext credential-logging vulnerability.',
     ],
+    highlight: { value: '160+', label: 'Automated tests shipped' },
   },
   {
     dateRange: 'JUN 2023 — MAR 2026',
@@ -29,6 +31,7 @@ export const experience: ExperienceEntry[] = [
       'Optimized 6+ applications for Core Web Vitals, SEO and WCAG accessibility, improving average page load time by 30%.',
       'Contributed to a scalable design system adopted across 6 products, cutting design-to-dev handoff time by 40%.',
     ],
+    highlight: { value: '30%', label: 'Fewer failed transactions' },
   },
   {
     dateRange: 'SEP 2022 — MAY 2023',
@@ -39,5 +42,6 @@ export const experience: ExperienceEntry[] = [
       'Developed a logistics web application connecting transporters and clients, supporting 100+ monthly bookings.',
       'Integrated third-party REST APIs for real-time data flow between transporters, clients and dispatch systems.',
     ],
+    highlight: { value: '100+', label: 'Monthly bookings supported' },
   },
 ];

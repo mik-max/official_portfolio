@@ -9,13 +9,13 @@ type ProjectsProps = {
 
 export function Projects({ projects, onMouseEnter, onMouseLeave }: ProjectsProps) {
   return (
-    <section id="projects" className="relative py-20 sm:py-28 border-t border-white/10 bg-black z-30">
+    <section id="projects" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper">
       <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
-        <div className="flex items-center gap-3 mb-16">
-          <span className="w-8 h-px bg-white/40"></span>
-          <span className="text-xs sm:text-sm uppercase tracking-[1px] text-white/60 font-medium">CHAPTER 04 • SELECTED WORK</span>
+        <div className="flex items-baseline gap-2.5 mb-6">
+          <span className="font-mono text-sm text-ink/40">04</span>
+          <span className="text-sm font-medium text-ink/60">Selected work</span>
         </div>
-        <h2 className="project-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-20 perspective-[1000px]">Featured Projects</h2>
+        <h2 className="project-title font-display text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight mb-20 perspective-[1000px]">Featured projects</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center">
           {projects.map((project, idx) => (
             <a
@@ -24,26 +24,31 @@ export function Projects({ projects, onMouseEnter, onMouseLeave }: ProjectsProps
               target="_blank"
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
-              className="group bg-white/[0.03] border border-white/10 hover:border-white/30 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-3 block shadow-2xl"
+              className="group bg-paper-raised border border-ink/10 hover:border-ink/25 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 block shadow-sm hover:shadow-lg w-full"
             >
+              <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-ink/10">
+                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="font-mono text-[11px] text-ink/40 ml-2 truncate">{new URL(project.url).hostname}</span>
+              </div>
               <div className="aspect-[16/10] relative overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
               </div>
-              <div className="p-8 sm:p-10">
-                <div className="flex justify-between items-start mb-4 gap-4">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">{project.title}</h3>
-                  <span className="text-emerald-400 text-[10px] sm:text-xs font-bold px-3 py-1 bg-emerald-400/10 rounded-full flex-shrink-0 uppercase tracking-widest">LIVE</span>
+              <div className="p-6 sm:p-8">
+                <div className="flex justify-between items-start mb-3 gap-4">
+                  <h3 className="text-lg sm:text-xl font-bold leading-tight">{project.title}</h3>
+                  <span className="text-accent text-[10px] sm:text-xs font-bold px-3 py-1 bg-accent/8 rounded-full flex-shrink-0">LIVE</span>
                 </div>
-                <p className="text-white/60 text-sm sm:text-base mb-8 line-clamp-2 leading-relaxed">{project.description}</p>
+                <p className="text-ink/60 text-sm sm:text-base mb-6 line-clamp-2 leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => <span key={tag} className="text-[10px] tracking-wider px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-white/40 font-bold uppercase">{tag}</span>)}
+                  {project.tags.map(tag => <span key={tag} className="font-mono text-[10px] px-3 py-1.5 border border-ink/10 rounded-full text-ink/45">{tag}</span>)}
                 </div>
               </div>
             </a>
