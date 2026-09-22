@@ -28,8 +28,8 @@ export function Hero({ heroRef }: HeroProps) {
             <span className="px-3.5 py-1.5 text-xs sm:text-sm rounded-full border border-ink/15 text-ink/60">Lagos, Nigeria</span>
           </div>
 
-          <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-normal">
-            Interfaces that carry <em className="italic text-accent">real weight.</em>
+          <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-bold">
+            Interfaces that carry <span className="text-accent">real weight.</span>
           </h1>
 
           <p className="hero-desc text-base sm:text-lg text-ink/60 leading-relaxed">

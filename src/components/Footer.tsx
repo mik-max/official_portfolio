@@ -9,7 +9,7 @@ export function Footer({ navItems }: FooterProps) {
     <footer className="relative border-t border-ink/10 bg-paper py-12 md:py-16">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-12 text-sm">
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-ink/40">
-          <div className="font-display text-lg">Michael Chinye</div>
+          <div className="font-display font-bold text-lg">Michael Chinye</div>
           <div className="hidden md:block w-px h-4 bg-ink/10"></div>
           <div className="font-medium">Senior Frontend Engineer · Lagos, Nigeria</div>
         </div>

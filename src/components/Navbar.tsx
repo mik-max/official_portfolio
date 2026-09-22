@@ -26,7 +26,7 @@ export function Navbar({ navItems, activeSection }: NavbarProps) {
     <nav className="fixed top-4 sm:top-6 left-0 right-0 z-[100] px-6 lg:px-20 max-w-[1400px] mx-auto w-full">
       <div className="flex items-center justify-between px-4 sm:px-5 py-2.5 sm:py-3 bg-paper/75 backdrop-blur-lg border border-ink/10 rounded-full shadow-sm">
         <div className="flex items-center gap-1.5">
-          <span className="font-display text-2xl sm:text-3xl">M.</span>
+          <span className="font-display font-bold text-2xl sm:text-3xl">M.</span>
           <span className="text-sm sm:text-base font-medium text-ink/80">Chinye</span>
         </div>
 
