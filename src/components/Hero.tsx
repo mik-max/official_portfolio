@@ -62,7 +62,7 @@ export function Hero({ heroRef }: HeroProps) {
           </div>
         </div>
 
-        <div className="flex-1 w-full max-w-lg flex flex-col gap-3.5">
+        <div className="flex-1 w-full max-w-xl flex flex-col gap-3.5">
           <div className="rounded-2xl bg-ink overflow-hidden shadow-[0_24px_60px_rgba(27,25,18,0.22)]">
             <div className="flex items-center gap-1.5 px-4 py-3 border-b border-paper/8">
               <span className="w-2 h-2 rounded-full bg-paper/20" />
