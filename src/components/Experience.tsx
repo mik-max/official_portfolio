@@ -2,7 +2,7 @@ import { experience } from '@/data/experience';
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper">
+    <section id="experience" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper-raised">
       <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
         <div className="flex items-baseline gap-2.5 mb-6">
           <span className="font-mono text-sm text-ink/65">03</span>
@@ -16,10 +16,10 @@ export function Experience() {
             <div key={entry.company} className={`relative ${idx < experience.length - 1 ? 'mb-16 sm:mb-20' : ''}`}>
               <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
                 <div className="md:w-32 flex-shrink-0 relative z-10">
-                  <div className="font-mono text-xs sm:text-sm text-ink/65 md:text-right bg-paper pr-4 inline-block md:block">{entry.dateRange}</div>
+                  <div className="font-mono text-xs sm:text-sm text-ink/65 md:text-right bg-paper-raised pr-4 inline-block md:block">{entry.dateRange}</div>
                 </div>
                 <div className="flex-1">
-                  <div className="bg-paper-raised border border-ink/10 rounded-3xl p-8 lg:p-10 hover:border-ink/25 transition-all hover:translate-x-1 shadow-sm flex flex-col md:flex-row gap-8 md:gap-10">
+                  <div className="bg-paper border border-ink/10 rounded-3xl p-8 lg:p-10 hover:border-ink/25 transition-all hover:translate-x-1 shadow-sm flex flex-col md:flex-row gap-8 md:gap-10">
                     <div className="flex-1">
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-6 gap-2">
                         <h3 className="text-2xl sm:text-3xl font-bold">{entry.title}</h3>

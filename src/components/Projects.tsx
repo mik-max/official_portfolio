@@ -24,9 +24,9 @@ export function Projects({ projects }: ProjectsProps) {
               className="group bg-paper-raised border border-ink/10 hover:border-ink/25 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 block shadow-sm hover:shadow-lg w-full"
             >
               <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-ink/10">
-                <span className="w-2 h-2 rounded-full bg-ink/15" />
-                <span className="w-2 h-2 rounded-full bg-ink/15" />
-                <span className="w-2 h-2 rounded-full bg-ink/15" />
+                <span className="w-2 h-2 rounded-full bg-[#FF5F57]" />
+                <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
+                <span className="w-2 h-2 rounded-full bg-[#28C840]" />
                 <span className="font-mono text-[11px] text-ink/65 ml-2 truncate">{new URL(project.url).hostname}</span>
               </div>
               <div className="aspect-[16/10] relative overflow-hidden">

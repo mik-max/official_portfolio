@@ -10,15 +10,15 @@ if (typeof window !== 'undefined') {
 
 const SECTION_IDS = ['about', 'skills', 'experience', 'projects', 'contact'];
 
-function revealLines(target: string | Element, scrollTrigger?: object) {
-  const split = new SplitText(target, { type: 'lines', linesClass: 'hero-line' });
+function revealWords(target: string | Element, scrollTrigger?: object) {
+  const split = new SplitText(target, { type: 'lines,words', linesClass: 'hero-line' });
 
-  gsap.set(split.lines, { yPercent: 100, opacity: 0 });
-  gsap.to(split.lines, {
+  gsap.set(split.words, { yPercent: 100, opacity: 0 });
+  gsap.to(split.words, {
     yPercent: 0,
     opacity: 1,
-    stagger: 0.08,
-    duration: 0.9,
+    stagger: 0.035,
+    duration: 0.7,
     ease: 'power3.out',
     ...(scrollTrigger ? { scrollTrigger } : {}),
   });
@@ -101,16 +101,16 @@ export function usePortfolioAnimations(
     // HERO REVEAL
     // =========================
 
-    const heroTitleSplit = new SplitText('.hero-title', { type: 'lines', linesClass: 'hero-line' });
+    const heroTitleSplit = new SplitText('.hero-title', { type: 'lines,words', linesClass: 'hero-line' });
     const heroDescSplit = new SplitText('.hero-desc', { type: 'lines' });
 
-    gsap.set(heroTitleSplit.lines, { yPercent: 100, opacity: 0 });
+    gsap.set(heroTitleSplit.words, { yPercent: 100, opacity: 0 });
     gsap.set(heroDescSplit.lines, { yPercent: 100, opacity: 0 });
 
     gsap
       .timeline({ defaults: { ease: 'power3.out' } })
       .fromTo('.hero-badge', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7 })
-      .to(heroTitleSplit.lines, { yPercent: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, '-=0.3')
+      .to(heroTitleSplit.words, { yPercent: 0, opacity: 1, stagger: 0.035, duration: 0.7 }, '-=0.3')
       .to(heroDescSplit.lines, { yPercent: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, '-=0.5')
       .fromTo('.hero-cta a', { opacity: 0, y: 16 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.6 }, '-=0.4')
       .fromTo('.hero-bottom', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.3');
@@ -119,13 +119,13 @@ export function usePortfolioAnimations(
     // SECTION TITLES
     // =========================
 
-    revealLines('.about-title', { trigger: '#about', start: 'top 75%' });
-    revealLines('.contact-heading', { trigger: '#contact', start: 'top 80%' });
-    revealLines('.project-title', { trigger: '#projects', start: 'top 85%' });
+    revealWords('.about-title', { trigger: '#about', start: 'top 75%' });
+    revealWords('.contact-heading', { trigger: '#contact', start: 'top 80%' });
+    revealWords('.project-title', { trigger: '#projects', start: 'top 85%' });
 
     ['#experience h2', '#skills h2'].forEach((selector) => {
       const el = document.querySelector(selector);
-      if (el) revealLines(el, { trigger: el, start: 'top 85%' });
+      if (el) revealWords(el, { trigger: el, start: 'top 85%' });
     });
 
     // =========================
