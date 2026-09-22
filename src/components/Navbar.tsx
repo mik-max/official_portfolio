@@ -6,11 +6,9 @@ import { NavItem } from '@/data/nav';
 type NavbarProps = {
   navItems: NavItem[];
   activeSection: string;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 };
 
-export function Navbar({ navItems, activeSection, onMouseEnter, onMouseLeave }: NavbarProps) {
+export function Navbar({ navItems, activeSection }: NavbarProps) {
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
 
@@ -38,8 +36,6 @@ export function Navbar({ navItems, activeSection, onMouseEnter, onMouseLeave }: 
             key={item.id}
             href={item.href}
             ref={(el) => { navRefs.current[item.id] = el; }}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
             className={`px-5 py-2 text-sm font-medium transition-colors relative z-10 ${activeSection === item.id ? 'text-ink' : 'text-ink/50 hover:text-ink'
               }`}
           >
@@ -57,8 +53,6 @@ export function Navbar({ navItems, activeSection, onMouseEnter, onMouseLeave }: 
 
       <a
         href="#contact"
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
         className="px-5 py-2.5 sm:px-7 sm:py-3.5 bg-ink text-paper text-xs sm:text-sm font-medium rounded-full hover:bg-ink/90 transition-all flex items-center gap-2"
       >
         Let&apos;s talk ↗

@@ -2,11 +2,9 @@ import { NavItem } from '@/data/nav';
 
 type FooterProps = {
   navItems: NavItem[];
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 };
 
-export function Footer({ navItems, onMouseEnter, onMouseLeave }: FooterProps) {
+export function Footer({ navItems }: FooterProps) {
   return (
     <footer className="relative border-t border-ink/10 bg-paper py-12 md:py-16">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-20 flex flex-col md:flex-row justify-between items-center gap-12 text-sm">
@@ -17,14 +15,14 @@ export function Footer({ navItems, onMouseEnter, onMouseLeave }: FooterProps) {
         </div>
         <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-ink/45 uppercase tracking-[2px] font-bold text-[10px]">
           {navItems.filter(i => i.id !== 'home').map(item => (
-            <a key={item.id} href={item.href} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="hover:text-ink transition-colors">{item.label}</a>
+            <a key={item.id} href={item.href} className="hover:text-ink transition-colors">{item.label}</a>
           ))}
         </div>
         <div className="flex items-center gap-6 sm:gap-8">
-          <a href="https://github.com/mik-max" target="_blank" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="flex items-center gap-2 text-ink/45 hover:text-ink transition-all font-bold tracking-widest uppercase text-xs">
+          <a href="https://github.com/mik-max" target="_blank" className="flex items-center gap-2 text-ink/45 hover:text-ink transition-all font-bold tracking-widest uppercase text-xs">
             <span>GitHub</span><span className="text-xl">↗</span>
           </a>
-          <a href="https://linkedin.com/in/chinyemichael" target="_blank" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="flex items-center gap-2 text-ink/45 hover:text-ink transition-all font-bold tracking-widest uppercase text-xs">
+          <a href="https://linkedin.com/in/chinyemichael" target="_blank" className="flex items-center gap-2 text-ink/45 hover:text-ink transition-all font-bold tracking-widest uppercase text-xs">
             <span>LinkedIn</span><span className="text-xl">↗</span>
           </a>
         </div>

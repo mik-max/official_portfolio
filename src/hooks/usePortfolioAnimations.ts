@@ -10,11 +10,57 @@ if (typeof window !== 'undefined') {
 
 const SECTION_IDS = ['about', 'skills', 'experience', 'projects', 'contact'];
 
+function revealLines(target: string | Element, scrollTrigger?: object) {
+  const split = new SplitText(target, { type: 'lines', linesClass: 'hero-line' });
+
+  gsap.set(split.lines, { yPercent: 100, opacity: 0 });
+  gsap.to(split.lines, {
+    yPercent: 0,
+    opacity: 1,
+    stagger: 0.08,
+    duration: 0.9,
+    ease: 'power3.out',
+    ...(scrollTrigger ? { scrollTrigger } : {}),
+  });
+
+  return split;
+}
+
 export function usePortfolioAnimations(
   heroRef: RefObject<HTMLDivElement | null>,
   setActiveSection: (section: string) => void
 ) {
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // =========================
+    // SECTION TRACKING (always on — this drives nav state, not motion)
+    // =========================
+
+    SECTION_IDS.forEach((sectionId) => {
+      ScrollTrigger.create({
+        trigger: `#${sectionId}`,
+        start: 'top 30%',
+        end: 'bottom 40%',
+        onEnter: () => setActiveSection(sectionId),
+        onEnterBack: () => setActiveSection(sectionId),
+      });
+    });
+
+    ScrollTrigger.create({
+      trigger: heroRef.current,
+      start: 'top top',
+      end: 'bottom 50%',
+      onEnter: () => setActiveSection('home'),
+      onEnterBack: () => setActiveSection('home'),
+    });
+
+    if (prefersReducedMotion) {
+      return () => {
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+      };
+    }
+
     // =========================
     // LENIS
     // =========================
@@ -48,232 +94,38 @@ export function usePortfolioAnimations(
     };
 
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', handleAnchorClick as any);
+      anchor.addEventListener('click', handleAnchorClick as EventListener);
     });
 
     // =========================
-    // HERO CINEMATIC REVEAL
+    // HERO REVEAL
     // =========================
 
-    const heroTitle = new SplitText('.hero-title', {
-      type: 'lines,chars',
-      linesClass: 'hero-line',
-    });
+    const heroTitleSplit = new SplitText('.hero-title', { type: 'lines', linesClass: 'hero-line' });
+    const heroDescSplit = new SplitText('.hero-desc', { type: 'lines' });
 
-    const heroDesc = new SplitText('.hero-desc', {
-      type: 'lines',
-    });
+    gsap.set(heroTitleSplit.lines, { yPercent: 100, opacity: 0 });
+    gsap.set(heroDescSplit.lines, { yPercent: 100, opacity: 0 });
 
-    gsap.set(heroTitle.chars, {
-      yPercent: 120,
-      rotateX: -90,
-      transformOrigin: '0% 50% -50',
-      opacity: 0,
-    });
-
-    gsap.set(heroDesc.lines, {
-      yPercent: 100,
-      opacity: 0,
-    });
-
-    const heroTl = gsap.timeline({
-      defaults: {
-        ease: 'expo.out',
-      },
-    });
-
-    heroTl
-      .fromTo(
-        '.hero-badge',
-        {
-          opacity: 0,
-          y: 20,
-          filter: 'blur(10px)',
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 1,
-        }
-      )
-
-      .to(
-        heroTitle.chars,
-        {
-          yPercent: 0,
-          rotateX: 0,
-          opacity: 1,
-          stagger: 0.018,
-          duration: 0.85,
-          ease: 'power4.out',
-        },
-        '-=0.4'
-      )
-
-      .to(
-        heroDesc.lines,
-        {
-          yPercent: 0,
-          opacity: 1,
-          stagger: 0.12,
-          duration: 1,
-        },
-        '-=1'
-      )
-
-      .fromTo(
-        '.hero-cta a',
-        {
-          opacity: 0,
-          y: 30,
-          scale: 0.92,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          stagger: 0.12,
-          duration: 1,
-          ease: 'power4.out',
-        },
-        '-=0.7'
-      )
-
-      .fromTo(
-        '.hero-bottom',
-        {
-          opacity: 0,
-          y: 80,
-          scale: 0.96,
-          filter: 'blur(10px)',
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          filter: 'blur(0px)',
-          duration: 1.8,
-          ease: 'expo.out',
-        },
-        '-=1'
-      );
+    gsap
+      .timeline({ defaults: { ease: 'power3.out' } })
+      .fromTo('.hero-badge', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7 })
+      .to(heroTitleSplit.lines, { yPercent: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, '-=0.3')
+      .to(heroDescSplit.lines, { yPercent: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, '-=0.5')
+      .fromTo('.hero-cta a', { opacity: 0, y: 16 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.6 }, '-=0.4')
+      .fromTo('.hero-bottom', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.3');
 
     // =========================
-    // ABOUT TITLE
+    // SECTION TITLES
     // =========================
 
-    const aboutTitleSplit = new SplitText('.about-title', {
-      type: 'lines,chars',
-      linesClass: 'hero-line',
-    });
+    revealLines('.about-title', { trigger: '#about', start: 'top 75%' });
+    revealLines('.contact-heading', { trigger: '#contact', start: 'top 80%' });
+    revealLines('.project-title', { trigger: '#projects', start: 'top 85%' });
 
-    gsap.set(aboutTitleSplit.chars, {
-      yPercent: 120,
-      rotateX: -90,
-      transformOrigin: '0% 50% -50',
-      opacity: 0,
-    });
-
-    gsap.to(aboutTitleSplit.chars, {
-      scrollTrigger: {
-        trigger: '#about',
-        start: 'top 75%',
-      },
-      yPercent: 0,
-      rotateX: 0,
-      opacity: 1,
-      stagger: 0.018,
-      duration: 0.85,
-      ease: 'power4.out',
-    });
-
-    // =========================
-    // CONTACT TITLE
-    // =========================
-
-    const contactSplit = new SplitText('.contact-heading', {
-      type: 'lines,chars',
-      linesClass: 'hero-line',
-    });
-
-    gsap.set(contactSplit.chars, {
-      yPercent: 120,
-      rotateX: -90,
-      transformOrigin: '0% 50% -50',
-      opacity: 0,
-    });
-
-    gsap.to(contactSplit.chars, {
-      scrollTrigger: {
-        trigger: '#contact',
-        start: 'top 80%',
-      },
-      yPercent: 0,
-      rotateX: 0,
-      opacity: 1,
-      stagger: 0.018,
-      duration: 0.85,
-      ease: 'power4.out',
-    });
-
-    // =========================
-    // PROJECT TITLES
-    // =========================
-
-    gsap.utils.toArray('.project-title').forEach((title: any) => {
-      const split = new SplitText(title, {
-        type: 'lines,chars',
-        linesClass: 'hero-line',
-      });
-
-      gsap.set(split.chars, {
-        yPercent: 120,
-        rotateX: -90,
-        transformOrigin: '0% 50% -50',
-        opacity: 0,
-      });
-
-      gsap.to(split.chars, {
-        scrollTrigger: {
-          trigger: title,
-          start: 'top 90%',
-        },
-        yPercent: 0,
-        rotateX: 0,
-        opacity: 1,
-        stagger: 0.018,
-        duration: 0.85,
-        ease: 'power4.out',
-      });
-    });
-    // Add same animation to Experience and Skills titles
     ['#experience h2', '#skills h2'].forEach((selector) => {
       const el = document.querySelector(selector);
-      if (el) {
-        const split = new SplitText(el, {
-          type: 'lines,chars',
-          linesClass: 'hero-line',
-        });
-        gsap.set(split.chars, {
-          yPercent: 120,
-          rotateX: -90,
-          transformOrigin: '0% 50% -50',
-          opacity: 0,
-        });
-        gsap.to(split.chars, {
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-          },
-          yPercent: 0,
-          rotateX: 0,
-          opacity: 1,
-          stagger: 0.018,
-          duration: 0.85,
-          ease: 'power4.out',
-        });
-      }
+      if (el) revealLines(el, { trigger: el, start: 'top 85%' });
     });
 
     // =========================
@@ -297,64 +149,6 @@ export function usePortfolioAnimations(
     );
 
     // =========================
-    // MAGNETIC HEADINGS
-    // =========================
-
-    const magneticHeadings: {
-      heading: HTMLElement;
-      onMove: (e: MouseEvent) => void;
-      onLeave: () => void;
-    }[] = [];
-
-    gsap.utils.toArray<HTMLElement>('h2').forEach((heading) => {
-      const onMove = (e: MouseEvent) => {
-        const rect = heading.getBoundingClientRect();
-
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        gsap.to(heading, {
-          x: x * 0.03,
-          y: y * 0.03,
-          duration: 1,
-          ease: 'power3.out',
-        });
-      };
-
-      const onLeave = () => {
-        gsap.to(heading, {
-          x: 0,
-          y: 0,
-          duration: 1.2,
-          ease: 'elastic.out(1, 0.4)',
-        });
-      };
-
-      heading.addEventListener('mousemove', onMove);
-      heading.addEventListener('mouseleave', onLeave);
-      magneticHeadings.push({ heading, onMove, onLeave });
-    });
-
-    // =========================
-    // SCROLL VELOCITY SKEW
-    // =========================
-
-    ScrollTrigger.create({
-      start: 0,
-      end: 'max',
-      onUpdate: (self) => {
-        const velocity = self.getVelocity();
-
-        gsap.to('.hero-title, h2', {
-          skewY: velocity * 0.0005,
-          duration: 0.5,
-          ease: 'power3.out',
-          overwrite: true,
-        });
-      },
-    });
-
-    // =========================
     // SECTION REVEALS
     // =========================
 
@@ -376,26 +170,6 @@ export function usePortfolioAnimations(
           },
         }
       );
-
-      ScrollTrigger.create({
-        trigger: `#${sectionId}`,
-        start: 'top 30%',
-        end: 'bottom 40%',
-        onEnter: () => setActiveSection(sectionId),
-        onEnterBack: () => setActiveSection(sectionId),
-      });
-    });
-
-    // =========================
-    // HOME TRACKER
-    // =========================
-
-    ScrollTrigger.create({
-      trigger: heroRef.current,
-      start: 'top top',
-      end: 'bottom 50%',
-      onEnter: () => setActiveSection('home'),
-      onEnterBack: () => setActiveSection('home'),
     });
 
     // =========================
@@ -404,15 +178,10 @@ export function usePortfolioAnimations(
 
     return () => {
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.removeEventListener('click', handleAnchorClick as any);
+        anchor.removeEventListener('click', handleAnchorClick as EventListener);
       });
 
-      magneticHeadings.forEach(({ heading, onMove, onLeave }) => {
-        heading.removeEventListener('mousemove', onMove);
-        heading.removeEventListener('mouseleave', onLeave);
-      });
-
-      ScrollTrigger.getAll().forEach((t: any) => t.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
 
       lenis.destroy();
     };

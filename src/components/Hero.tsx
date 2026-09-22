@@ -2,8 +2,6 @@ import { RefObject } from 'react';
 
 type HeroProps = {
   heroRef: RefObject<HTMLDivElement | null>;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 };
 
 const stats = [
@@ -22,7 +20,7 @@ const bars = [
   { height: '100%', accent: true },
 ];
 
-export function Hero({ heroRef, onMouseEnter, onMouseLeave }: HeroProps) {
+export function Hero({ heroRef }: HeroProps) {
   return (
     <section ref={heroRef} id="home" className="relative min-h-dvh h-auto flex items-center px-6 lg:px-16 max-w-[1400px] mx-auto pt-28 pb-20">
       <div className="w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
@@ -33,7 +31,7 @@ export function Hero({ heroRef, onMouseEnter, onMouseLeave }: HeroProps) {
             <span className="px-3.5 py-1.5 text-xs sm:text-sm rounded-full border border-ink/15 text-ink/60">Lagos, Nigeria</span>
           </div>
 
-          <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-normal perspective-[1000px]">
+          <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-normal">
             Interfaces that carry <em className="italic">real weight.</em>
           </h1>
 
@@ -44,8 +42,6 @@ export function Hero({ heroRef, onMouseEnter, onMouseLeave }: HeroProps) {
           <div className="hero-cta flex flex-wrap gap-4 pt-2">
             <a
               href="#projects"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
               className="px-7 py-3.5 bg-accent text-paper text-sm sm:text-base font-medium rounded-full hover:bg-accent/90 transition-colors"
             >
               View the work ↗
@@ -53,8 +49,6 @@ export function Hero({ heroRef, onMouseEnter, onMouseLeave }: HeroProps) {
             <a
               href="/assets/resume.pdf"
               download
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
               className="px-7 py-3.5 border border-ink/20 text-ink text-sm sm:text-base font-medium rounded-full hover:bg-ink/5 transition-colors"
             >
               Download résumé ↓

@@ -3,11 +3,9 @@ import { Project } from '@/data/projects';
 
 type ProjectsProps = {
   projects: Project[];
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
 };
 
-export function Projects({ projects, onMouseEnter, onMouseLeave }: ProjectsProps) {
+export function Projects({ projects }: ProjectsProps) {
   return (
     <section id="projects" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper">
       <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
@@ -15,15 +13,13 @@ export function Projects({ projects, onMouseEnter, onMouseLeave }: ProjectsProps
           <span className="font-mono text-sm text-ink/40">04</span>
           <span className="text-sm font-medium text-ink/60">Selected work</span>
         </div>
-        <h2 className="project-title font-display text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight mb-20 perspective-[1000px]">Featured projects</h2>
+        <h2 className="project-title font-display text-4xl sm:text-5xl lg:text-6xl font-normal leading-tight mb-20">Featured projects</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center">
           {projects.map((project, idx) => (
             <a
               key={idx}
               href={project.url}
               target="_blank"
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
               className="group bg-paper-raised border border-ink/10 hover:border-ink/25 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 block shadow-sm hover:shadow-lg w-full"
             >
               <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-ink/10">
