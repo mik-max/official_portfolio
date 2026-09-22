@@ -5,6 +5,7 @@
   --color-paper-raised: #FFFFFF;
   --color-ink: #1B1912;
   --color-accent: #2C3FA0;
+  --color-accent-light: #8C9CEE;
 }
 
 @theme inline {

@@ -152,7 +152,7 @@ export function usePortfolioAnimations(
     // SECTION REVEALS
     // =========================
 
-    SECTION_IDS.forEach((sectionId) => {
+    [...SECTION_IDS, 'interlude'].forEach((sectionId) => {
       gsap.fromTo(
         `#${sectionId} .section-content`,
         {

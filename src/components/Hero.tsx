@@ -11,18 +11,15 @@ const stats = [
   { value: '4+', label: 'Years experience' },
 ];
 
-const bars = [
-  { height: '40%', accent: false },
-  { height: '65%', accent: false },
-  { height: '50%', accent: false },
-  { height: '85%', accent: false },
-  { height: '60%', accent: false },
-  { height: '100%', accent: true },
+const buildLines = [
+  '1,000+ merchants served',
+  '20% referral growth',
+  '160+ tests passing',
 ];
 
 export function Hero({ heroRef }: HeroProps) {
   return (
-    <section ref={heroRef} id="home" className="relative min-h-dvh h-auto flex items-center px-6 lg:px-16 max-w-[1400px] mx-auto pt-28 pb-20">
+    <section ref={heroRef} id="home" className="relative min-h-dvh h-auto flex items-center px-6 lg:px-20 max-w-[1400px] mx-auto pt-28 pb-20">
       <div className="w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
 
         <div className="flex-1 max-w-xl space-y-7">
@@ -32,7 +29,7 @@ export function Hero({ heroRef }: HeroProps) {
           </div>
 
           <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-normal">
-            Interfaces that carry <em className="italic">real weight.</em>
+            Interfaces that carry <em className="italic text-accent">real weight.</em>
           </h1>
 
           <p className="hero-desc text-base sm:text-lg text-ink/60 leading-relaxed">
@@ -66,39 +63,25 @@ export function Hero({ heroRef }: HeroProps) {
         </div>
 
         <div className="flex-1 w-full max-w-lg flex flex-col gap-3.5">
-          <div
-            className="relative h-[420px] sm:h-[480px] rounded-2xl border border-ink/10 bg-paper-raised overflow-hidden p-8 sm:p-10"
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(rgba(27,25,18,0.05) 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, rgba(27,25,18,0.05) 0 1px, transparent 1px 40px)',
-            }}
-          >
-            <div className="absolute top-16 left-10 w-52 h-44 bg-accent/8 rounded-xl -rotate-3" />
-            <div className="absolute inset-8 top-12 rounded-xl bg-paper-raised border border-ink/10 shadow-xl p-5 flex flex-col gap-4">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-ink/15" />
-                <span className="w-2 h-2 rounded-full bg-ink/15" />
-                <span className="w-2 h-2 rounded-full bg-ink/15" />
-                <span className="h-2 w-1/3 bg-ink/10 rounded ml-2" />
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="h-2.5 w-[85%] bg-ink/10 rounded" />
-                <span className="h-2.5 w-[65%] bg-ink/10 rounded" />
-                <span className="h-2.5 w-[40%] bg-accent rounded" />
-              </div>
-              <div className="flex items-end gap-2 flex-grow">
-                {bars.map((bar, i) => (
-                  <div
-                    key={i}
-                    className={`flex-1 rounded-t-sm ${bar.accent ? 'bg-accent' : 'bg-accent/8'}`}
-                    style={{ height: bar.height }}
-                  />
-                ))}
-              </div>
+          <div className="rounded-2xl bg-ink overflow-hidden shadow-[0_24px_60px_rgba(27,25,18,0.22)]">
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b border-paper/8">
+              <span className="w-2 h-2 rounded-full bg-paper/20" />
+              <span className="w-2 h-2 rounded-full bg-paper/20" />
+              <span className="w-2 h-2 rounded-full bg-paper/20" />
+              <span className="font-mono text-[11px] text-paper/40 ml-2">build.log</span>
             </div>
-            <span className="absolute bottom-6 right-6 w-3.5 h-3.5 rounded-full border-2 border-accent" />
+            <div className="font-mono text-sm sm:text-[15px] leading-relaxed px-6 sm:px-7 py-7 sm:py-8 flex flex-col gap-4">
+              <div className="text-paper/45">$ deploying referral-program...</div>
+              {buildLines.map((line) => (
+                <div key={line} className="flex gap-2.5">
+                  <span className="text-accent-light">✓</span>
+                  <span className="text-paper">{line}</span>
+                </div>
+              ))}
+              <div className="text-paper/45 pt-1.5 mt-1 border-t border-paper/8">$ shipped in production ✓</div>
+            </div>
           </div>
-          <span className="font-mono text-xs text-ink/40 self-end">A system, not a screenshot.</span>
+          <span className="font-mono text-xs text-ink/40 self-end">A build log, not a screenshot.</span>
         </div>
 
       </div>

@@ -23,7 +23,7 @@ export function Navbar({ navItems, activeSection }: NavbarProps) {
   }, [activeSection]);
 
   return (
-    <nav className="fixed top-4 sm:top-6 left-0 right-0 z-[100] px-4 md:px-6 max-w-[1400px] mx-auto w-full flex items-center justify-between">
+    <nav className="fixed top-4 sm:top-6 left-0 right-0 z-[100] px-6 lg:px-20 max-w-[1400px] mx-auto w-full flex items-center justify-between">
       <div className="flex items-center gap-1.5">
         <span className="font-display text-2xl sm:text-3xl">M.</span>
         <span className="text-sm sm:text-base font-medium text-ink/80">Chinye</span>
