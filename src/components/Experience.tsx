@@ -2,8 +2,9 @@ import { experience } from '@/data/experience';
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper-raised">
-      <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
+    <section id="experience" className="relative py-20 sm:py-28 bg-paper-raised">
+      <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-40 sm:h-56 bg-linear-to-b from-paper to-transparent pointer-events-none" />
+      <div className="section-content relative max-w-[1400px] mx-auto px-6 lg:px-20">
         <div className="flex items-baseline gap-2.5 mb-6">
           <span className="font-mono text-sm text-ink/65">03</span>
           <span className="text-sm font-medium text-ink/65">Experience</span>

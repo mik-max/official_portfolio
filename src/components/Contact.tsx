@@ -3,8 +3,9 @@ import { contactLinks } from '@/data/contact';
 
 export function Contact() {
   return (
-    <section id="contact" className="relative py-20 sm:py-28 lg:py-40 border-t border-ink/10 bg-paper-raised">
-      <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
+    <section id="contact" className="relative py-20 sm:py-28 lg:py-40 bg-paper-raised">
+      <div aria-hidden="true" className="absolute top-0 left-0 right-0 h-40 sm:h-56 bg-linear-to-b from-paper to-transparent pointer-events-none" />
+      <div className="section-content relative max-w-[1400px] mx-auto px-6 lg:px-20">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2.5 mb-8">
             <span className="font-mono text-sm text-ink/65">05</span>
