@@ -10,8 +10,8 @@ export function Projects({ projects }: ProjectsProps) {
     <section id="projects" className="relative py-20 sm:py-28 border-t border-ink/10 bg-paper">
       <div className="section-content max-w-[1400px] mx-auto px-6 lg:px-20">
         <div className="flex items-baseline gap-2.5 mb-6">
-          <span className="font-mono text-sm text-ink/40">04</span>
-          <span className="text-sm font-medium text-ink/60">Selected work</span>
+          <span className="font-mono text-sm text-ink/65">04</span>
+          <span className="text-sm font-medium text-ink/65">Selected work</span>
         </div>
         <h2 className="project-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-20">Featured projects</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center">
@@ -20,13 +20,14 @@ export function Projects({ projects }: ProjectsProps) {
               key={idx}
               href={project.url}
               target="_blank"
+              rel="noopener noreferrer"
               className="group bg-paper-raised border border-ink/10 hover:border-ink/25 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 block shadow-sm hover:shadow-lg w-full"
             >
               <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-ink/10">
                 <span className="w-2 h-2 rounded-full bg-ink/15" />
                 <span className="w-2 h-2 rounded-full bg-ink/15" />
                 <span className="w-2 h-2 rounded-full bg-ink/15" />
-                <span className="font-mono text-[11px] text-ink/40 ml-2 truncate">{new URL(project.url).hostname}</span>
+                <span className="font-mono text-[11px] text-ink/65 ml-2 truncate">{new URL(project.url).hostname}</span>
               </div>
               <div className="aspect-[16/10] relative overflow-hidden">
                 <Image
@@ -40,11 +41,15 @@ export function Projects({ projects }: ProjectsProps) {
               <div className="p-6 sm:p-8">
                 <div className="flex justify-between items-start mb-3 gap-4">
                   <h3 className="text-lg sm:text-xl font-bold leading-tight">{project.title}</h3>
-                  <span className="text-accent text-[10px] sm:text-xs font-bold px-3 py-1 bg-accent/8 rounded-full flex-shrink-0">LIVE</span>
+                  {project.status === 'live' ? (
+                    <span className="text-accent text-[11px] sm:text-xs font-bold px-3 py-1 bg-accent/8 rounded-full flex-shrink-0">LIVE</span>
+                  ) : (
+                    <span className="text-ink/65 text-[11px] sm:text-xs font-bold px-3 py-1 bg-ink/5 rounded-full flex-shrink-0">IN DEVELOPMENT</span>
+                  )}
                 </div>
-                <p className="text-ink/60 text-sm sm:text-base mb-6 line-clamp-2 leading-relaxed">{project.description}</p>
+                <p className="text-ink/70 text-sm sm:text-base mb-6 line-clamp-2 leading-relaxed">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => <span key={tag} className="font-mono text-[10px] px-3 py-1.5 border border-ink/10 rounded-full text-ink/45">{tag}</span>)}
+                  {project.tags.map(tag => <span key={tag} className="font-mono text-[11px] px-3 py-1.5 border border-ink/10 rounded-full text-ink/65">{tag}</span>)}
                 </div>
               </div>
             </a>

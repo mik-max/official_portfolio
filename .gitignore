@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vendored agent skill packages (re-installable via `npx skills add`;
+# .claude/skills is just symlinks into .agents/skills)
+/.agents/
+/.claude/

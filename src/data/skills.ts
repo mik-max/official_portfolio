@@ -1,23 +1,27 @@
 export type SkillCategory = {
-  label: string;
+  key: string;
   skills: string[];
 };
 
 export const skillCategories: SkillCategory[] = [
   {
-    label: 'Frontend',
+    key: 'frontend',
     skills: ['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Chakra UI', 'GSAP', 'HTML5', 'CSS3'],
   },
   {
-    label: 'Backend & APIs',
+    key: 'backend',
     skills: ['Node.js', 'Express.js', 'NestJS', 'REST APIs', 'OpenAPI/Swagger'],
   },
   {
-    label: 'Databases & CMS',
+    key: 'databases',
     skills: ['MongoDB', 'MSSQL', 'Firebase', 'Strapi', 'Sanity CMS'],
   },
   {
-    label: 'Core expertise & tooling',
-    skills: ['Architecture', 'Systems', 'Optimisation', 'Responsiveness', 'Accessibility', 'Jest', 'React Testing Library', 'Git/GitHub', 'Webpack/Vite'],
+    key: 'tooling',
+    skills: ['Jest', 'React Testing Library', 'Git/GitHub', 'Webpack/Vite'],
+  },
+  {
+    key: 'practices',
+    skills: ['Architecture', 'Systems', 'Optimisation', 'Responsiveness', 'Accessibility'],
   },
 ];

@@ -13,20 +13,20 @@ export function About() {
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7 space-y-6 sm:space-y-8 order-2 lg:order-1">
             <div className="flex items-baseline gap-2.5">
-              <span className="font-mono text-sm text-ink/40">01</span>
-              <span className="text-sm font-medium text-ink/60">About</span>
+              <span className="font-mono text-sm text-ink/65">01</span>
+              <span className="text-sm font-medium text-ink/65">About</span>
             </div>
             <h2 className="about-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Hi, I&apos;m Michael.</h2>
             <div className="max-w-2xl text-ink/70 text-base sm:text-lg lg:text-[1.35rem] leading-relaxed space-y-6">
               <p>Senior Frontend Engineer with 4+ years crafting scalable, high-performance web applications.</p>
               <p>I specialize in React, TypeScript, Next.js and modern design systems, turning complex fintech, e-commerce and SaaS challenges into intuitive, production-ready experiences.</p>
-              <p className="text-ink/55 text-base sm:text-lg italic">When I&apos;m not coding, you&apos;ll find me exploring new UI patterns, refining animations, or thinking about how to make digital products feel alive.</p>
+              <p className="text-ink/70 text-base sm:text-lg italic">When I&apos;m not coding, you&apos;ll find me exploring new UI patterns, refining animations, or thinking about how to make digital products feel alive.</p>
             </div>
             <div className="flex flex-wrap gap-8 sm:gap-12 pt-4">
               {stats.map((s) => (
                 <div key={s.label}>
                   <div className="stat-number font-mono text-3xl sm:text-4xl font-bold text-accent">{s.value}</div>
-                  <div className="stat-label text-xs text-ink/50 mt-1">{s.label}</div>
+                  <div className="stat-label text-xs text-ink/65 mt-1">{s.label}</div>
                 </div>
               ))}
             </div>
