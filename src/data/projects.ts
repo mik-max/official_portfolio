@@ -27,12 +27,12 @@ export const projects: Project[] = [
     status: 'live'
   },
   {
-    title: "Collabify",
-    description: "Creator-brand collaboration platform with smooth micro-interactions and early-access onboarding.",
-    url: "https://usecollabify.com/",
-    image: "/images/project-thumbnails/collabify.png",
-    tags: ["Next.js", "Tailwind", "TypeScript"],
-    status: 'in-development'
+    title: "Mecitac Nigeria Ltd",
+    description: "Corporate site for a software, cloud, AI and energy-systems consulting firm — built with a service-driven layout and clear conversion paths.",
+    url: "https://www.mecitacng.com/",
+    image: "/images/project-thumbnails/mecitac.jpg",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    status: 'live'
   },
   {
     title: "Mainstack Link-In-Bio",
@@ -51,11 +51,11 @@ export const projects: Project[] = [
     status: 'live'
   },
   {
-    title: "Mecitac Nigeria Ltd",
-    description: "Corporate site for a software, cloud, AI and energy-systems consulting firm — built with a service-driven layout and clear conversion paths.",
-    url: "https://www.mecitacng.com/",
-    image: "/images/project-thumbnails/mecitac.jpg",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    status: 'live'
+    title: "Collabify",
+    description: "Creator-brand collaboration platform with smooth micro-interactions and early-access onboarding.",
+    url: "https://usecollabify.com/",
+    image: "/images/project-thumbnails/collabify.png",
+    tags: ["Next.js", "Tailwind", "TypeScript"],
+    status: 'in-development'
   }
 ];

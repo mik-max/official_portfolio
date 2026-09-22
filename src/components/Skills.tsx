@@ -19,8 +19,8 @@ export function Skills() {
         </div>
 
         <div className="xl:flex xl:items-start xl:gap-16">
-          <div className="max-w-3xl xl:flex-shrink-0">
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-14 sm:mb-16">Tools &amp; <span className="text-accent">technologies</span></h2>
+          <div className="max-w-3xl xl:max-w-[718px] xl:flex-shrink-0">
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-14 sm:mb-16">Tools &amp; <span className="text-accent">technologies</span></h2>
             <div>
               {skillCategories.map((category) => (
                 <div

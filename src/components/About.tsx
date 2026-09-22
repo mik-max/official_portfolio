@@ -18,7 +18,7 @@ export function About() {
               <span className="font-mono text-sm text-ink/65">01</span>
               <span className="text-sm font-medium text-ink/65">About</span>
             </div>
-            <h2 className="about-title font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">Hi, I&apos;m <span className="text-accent">Michael.</span></h2>
+            <h2 className="about-title font-display text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight">Hi, I&apos;m <span className="text-accent">Michael.</span></h2>
             <div className="max-w-2xl text-ink/70 text-base sm:text-lg lg:text-[1.35rem] leading-relaxed space-y-6">
               <p>Senior Frontend Engineer with 4+ years crafting scalable, high-performance web applications.</p>
               <p>I specialize in React, TypeScript, Next.js and modern design systems, turning complex fintech, e-commerce and SaaS challenges into intuitive, production-ready experiences.</p>

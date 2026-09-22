@@ -11,7 +11,7 @@ export function Contact() {
             <span className="font-mono text-sm text-ink/65">05</span>
             <span className="text-sm font-medium text-ink/65">Contact</span>
           </div>
-          <h2 className="contact-heading font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-10">Let&apos;s build something <span className="text-accent">exceptional.</span></h2>
+          <h2 className="contact-heading font-display text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-10">Let&apos;s build something <span className="text-accent">exceptional.</span></h2>
           <p className="text-ink/70 text-lg sm:text-xl max-w-xl mx-auto mb-16 leading-relaxed">Currently open to senior opportunities, collaborations, and high-impact freelance projects.</p>
 
           <div className="bg-paper border border-ink/10 rounded-[2.5rem] p-6 sm:p-10 lg:p-12 mx-auto max-w-2xl shadow-sm">

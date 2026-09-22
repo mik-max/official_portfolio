@@ -21,7 +21,7 @@ export function Hero({ heroRef }: HeroProps) {
             <span className="px-3.5 py-1.5 text-xs sm:text-sm rounded-full border border-ink/15 text-ink/70">Lagos, Nigeria</span>
           </div>
 
-          <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-bold">
+          <h1 className="hero-title font-display text-4xl sm:text-6xl lg:text-[4.2rem] leading-[1.1] font-bold">
             Interfaces that carry <span className="text-accent">real weight.</span>
           </h1>
 
@@ -41,7 +41,7 @@ export function Hero({ heroRef }: HeroProps) {
               download
               className="px-7 py-3.5 border border-ink/20 text-ink text-sm sm:text-base font-medium rounded-full hover:bg-ink/5 transition-colors"
             >
-              Download résumé ↓
+              Download resume ↓
             </a>
           </div>
         </div>
