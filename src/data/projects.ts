@@ -27,10 +27,10 @@ export const projects: Project[] = [
     status: 'live'
   },
   {
-    title: "Mecitac Nigeria Ltd",
+    title: "Technogenix Ltd",
     description: "Corporate site for a software, cloud, AI and energy-systems consulting firm — built with a service-driven layout and clear conversion paths.",
-    url: "https://www.mecitacng.com/",
-    image: "/images/project-thumbnails/mecitac.jpg",
+    url: "https://www.technogenixng.com/",
+    image: "/images/project-thumbnails/technogenix.jpg",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     status: 'live'
   },
