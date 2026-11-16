@@ -1,4 +1,5 @@
-export type ProjectStatus = 'live' | 'in-development';
+// 'archived' = the page is no longer online; the card renders without a link.
+export type ProjectStatus = 'live' | 'in-development' | 'archived';
 
 export type Project = {
   title: string;
@@ -11,25 +12,9 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Mainstack Referral Program",
-    description: "Dynamic referral system with real-time tracking, multi-currency payouts and seamless sharing flows.",
-    url: "https://mainstack.com/referral-program",
-    image: "/images/project-thumbnails/referral.png",
-    tags: ["Tailwind", "TypeScript", "Next.js"],
-    status: 'live'
-  },
-  {
-    title: "Mainstack Ambassador Program",
-    description: "High-conversion ambassador platform with lifetime revenue share and intuitive merchant dashboards.",
-    url: "https://mainstack.com/ambassador-program",
-    image: "/images/project-thumbnails/ambassador.png",
-    tags: ["Next.js", "TypeScript", "GSAP"],
-    status: 'live'
-  },
-  {
     title: "Technogenix Ltd",
     description: "Corporate site for a software, cloud, AI and energy-systems consulting firm — built with a service-driven layout and clear conversion paths.",
-    url: "https://www.technogenixng.com/",
+    url: "https://www.technogenix.com.ng/",
     image: "/images/project-thumbnails/technogenix.jpg",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     status: 'live'
@@ -57,5 +42,21 @@ export const projects: Project[] = [
     image: "/images/project-thumbnails/collabify.png",
     tags: ["Next.js", "Tailwind", "TypeScript"],
     status: 'in-development'
+  },
+  {
+    title: "Mainstack Referral Program",
+    description: "Dynamic referral system with real-time tracking, multi-currency payouts and seamless sharing flows.",
+    url: "https://mainstack.com/referral-program",
+    image: "/images/project-thumbnails/referral.png",
+    tags: ["Tailwind", "TypeScript", "Next.js"],
+    status: 'archived'
+  },
+  {
+    title: "Mainstack Ambassador Program",
+    description: "High-conversion ambassador platform with lifetime revenue share and intuitive merchant dashboards.",
+    url: "https://mainstack.com/ambassador-program",
+    image: "/images/project-thumbnails/ambassador.png",
+    tags: ["Next.js", "TypeScript", "GSAP"],
+    status: 'archived'
   }
 ];
