@@ -1,17 +1,120 @@
 @import "tailwindcss";
 
+/*
+ * Terminal design system tokens.
+ * Values come from the system's tokens.json (https://claude.ai/artifact/FGf9mcdLyWMWmtmw4xXNGE);
+ * DESIGN.md says where they apply. Change a value there first, then here.
+ *
+ * Spacing needs no tokens: the system's space-1 … space-16 (4, 8, 12, 16, 24, 32, 48, 64px)
+ * are Tailwind's default steps, so space-4 is p-4, space-16 is py-16, and so on.
+ */
 @theme {
+  /* Two grounds, used together on one page in sequence. Not a light/dark theme: no toggle. */
+  --color-ground-dark: #0E1419;         /* Where work is shown: hero, build log, code, deploy records. */
+  --color-ground-dark-raised: #18222B;  /* Panels and inset blocks on ground-dark. */
+  --color-ground-light: #EFF1F0;        /* Where there is reading to do: prose, experience, case studies. */
+  --color-ground-light-raised: #FFFFFF; /* Plates and tables on ground-light. */
+
+  /* Text. Two per ground, not interchangeable. */
+  --color-ink: #101619;                 /* Primary text on ground-light. 16:1. */
+  --color-ink-muted: #4A5862;           /* Secondary text on ground-light. 6.5:1; do not lighten. */
+  --color-text-on-dark: #DCE4EA;        /* Primary text on ground-dark. 14:1. */
+  --color-text-on-dark-muted: #8798A5;  /* Secondary text on ground-dark. 6.2:1; do not darken. */
+
+  /* Signal: the only accent, rationed to status marks and the single primary action. */
+  --color-signal: #FFB13B;              /* ground-dark only. 1.6:1 on ground-light: unreadable there. */
+  --color-signal-deep: #9A5400;         /* The signal hue on ground-light: links. 5.1:1. */
+
+  /* Hairlines, dividers and control borders. */
+  --color-rule-dark: #22303B;
+  --color-rule-light: #D5D9D7;
+
+  /* Square by default (rounded-none). rounded-sm is the only interface radius;
+     rounded-full is for the live status dot and nothing else. No shadows. */
+  --radius-sm: 3px;
+
+  /* Legacy palette, still used by sections not yet rebuilt.
+     Delete each one when its last use goes. */
   --color-paper: #F4F1E9;
   --color-paper-raised: #FFFFFF;
-  --color-ink: #1B1912;
   --color-accent: #2C3FA0;
   --color-accent-light: #8C9CEE;
 }
 
 @theme inline {
+  /* Terminal families. Mono is the display face, Sans is the body face. */
+  --font-plex-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-plex-sans: var(--font-ibm-plex-sans), system-ui, sans-serif;
+
+  /* Legacy families, still used by sections not yet rebuilt. */
   --font-sans: var(--font-space-grotesk);
   --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-jetbrains-mono);
+}
+
+/*
+ * Type styles, one class per style in the system. Each sets family, size, line height,
+ * weight and tracking together, so a style cannot be half-applied.
+ * Scale 46 / 36 / 26 / 17 / 15 / 13. Use type-display-xl once per page.
+ * Headlines cap at about six words; body copy never goes into mono.
+ */
+@utility type-display-xl {
+  font-family: var(--font-plex-mono);
+  font-size: 2.875rem; /* 46px */
+  line-height: 3.3125rem; /* 53px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+@utility type-display-l {
+  font-family: var(--font-plex-mono);
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.625rem; /* 42px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+@utility type-display-m {
+  font-family: var(--font-plex-mono);
+  font-size: 1.625rem; /* 26px */
+  line-height: 2rem; /* 32px */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+@utility type-body-l {
+  font-family: var(--font-plex-sans);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.6875rem; /* 27px */
+  font-weight: 400;
+}
+
+@utility type-body {
+  font-family: var(--font-plex-sans);
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: 400;
+}
+
+@utility type-label {
+  font-family: var(--font-plex-sans);
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.25rem; /* 20px */
+  font-weight: 500;
+}
+
+@utility type-data {
+  font-family: var(--font-plex-mono);
+  font-size: 0.84375rem; /* 13.5px */
+  line-height: 1.6875rem; /* 27px */
+  font-weight: 400;
+}
+
+@utility type-data-s {
+  font-family: var(--font-plex-mono);
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.125rem; /* 18px */
+  font-weight: 400;
 }
 
 .hero-line {

@@ -169,7 +169,7 @@ Nothing ships until all pass:
 
 1. Verify mobile at 390px — if broken, this outranks everything else here
 2. Confirm the thesis
-3. Commit type and colour tokens (close the OPEN rows above)
+3. Commit type and colour tokens
 4. Rebuild the hero static, motion off
 5. Strip the anti-defaults
 6. Fix vertical rhythm — Skills section, and the gap between Skills and Experience
@@ -225,3 +225,23 @@ see the seam.
 
 Rejected: Senior Frontend Engineer, which undersells the SkytLabs backend work, and Senior Backend
 Engineer, which only the current contract supports.
+
+### 2026-11-19 — Step 3: tokens committed
+
+The system's tokens live in `src/app/globals.css`, under the system's own names: colours as
+`--color-*` (so `bg-ground-dark`, `text-ink-muted`, `text-signal-deep`), `--radius-sm: 3px`, the
+families as `font-plex-mono` and `font-plex-sans`, and one `type-*` class per type style
+(`type-display-xl` … `type-data-s`), each setting family, size, line height, weight and tracking
+together. Spacing needs no tokens: the system's steps are Tailwind's defaults.
+
+The old palette and fonts (`paper`, `accent`, `font-display`, Space Grotesk, JetBrains Mono) stay
+beside them, marked legacy, until the sections that use them are rebuilt. `ink` is the one shared
+name, so it took the system value; the visible change is a warm-to-cool shift in near-black text.
+IBM Plex loads with `preload: false` until a rebuilt section renders it. Instrument Serif was
+loaded but never used, so it went.
+
+Rejected: swapping the whole palette and type in place. The site deploys from `main`, so that would
+ship a half-redesigned page.
+
+Still owed from the design skill's Phase 1: a one-sentence layout concept with a wireframe (before
+step 4), and a motion easing and duration scale (by step 8).
