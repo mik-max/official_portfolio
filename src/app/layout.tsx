@@ -1,25 +1,14 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-// Terminal design system faces. Mono is static, so load only the two weights the type
-// styles use (400 data, 600 display); Sans is variable and covers 400 and 500 in one file.
-// preload stays off until a rebuilt section renders them, so the live site doesn't
-// download fonts it doesn't use yet.
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
-  weight: ["400", "600"],
-  preload: false,
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
-  subsets: ["latin"],
-  preload: false,
-});
-
-// Legacy faces, still used by sections not yet rebuilt.
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
@@ -77,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmPlexMono.variable} ${ibmPlexSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

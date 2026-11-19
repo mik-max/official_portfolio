@@ -1,18 +1,6 @@
 import { Fragment } from 'react';
 import { contactLinks } from '@/data/contact';
 
-// Allow line breaks only after "@" and "/" so an email or URL wraps at a natural seam
-// ("name@" / "domain.com") instead of mid-word.
-function withBreakPoints(value: string) {
-  const parts = value.match(/[^@/]+[@/]?|[@/]/g) ?? [value];
-  return parts.map((part, i) => (
-    <Fragment key={i}>
-      {i > 0 && <wbr />}
-      {part}
-    </Fragment>
-  ));
-}
-
 export function Contact() {
   return (
     <section id="contact" className="relative py-20 sm:py-28 lg:py-40 bg-paper-raised">
@@ -37,9 +25,9 @@ export function Contact() {
                     className="block group"
                   >
                     <div className="flex items-center justify-between text-left">
-                      <div className="min-w-0">
+                      <div>
                         <div className="text-[11px] uppercase tracking-widest text-ink/60 mb-2 font-bold">{link.label}</div>
-                        <div className="font-mono text-lg sm:text-2xl font-bold group-hover:text-accent transition-colors [overflow-wrap:anywhere]">{withBreakPoints(link.value)}</div>
+                        <div className="font-mono text-lg sm:text-2xl font-bold group-hover:text-accent transition-colors break-all sm:break-normal">{link.value}</div>
                       </div>
                       <span className="text-2xl sm:text-4xl text-ink/30 group-hover:text-ink group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300">↗</span>
                     </div>
