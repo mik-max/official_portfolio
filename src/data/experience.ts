@@ -1,28 +1,43 @@
 export type ExperienceEntry = {
+  id: string;
   dateRange: string;
   title: string;
   company: string;
+  summary: string;
+  metrics: { value: string; label: string }[];
   bullets: string[];
-  highlight: { value: string; label: string };
 };
 
 export const experience: ExperienceEntry[] = [
   {
-    dateRange: '2026 — PRESENT',
-    title: 'Full-Stack Engineer (Contract)',
-    company: 'SkytLabs',
-    bullets: [
-      'Designed and built a production NestJS/TypeScript backend for a field data-collection platform, from schema design through deployment.',
-      'Architected a ports-and-adapters API with 21 REST endpoints across 11 modules, backed by 160+ automated tests and typed OpenAPI/Swagger contracts.',
-      'Built secure agent authentication (password + passwordless OTP, device-binding, session/refresh tokens) and a mirror-sync job queue bridging two independent SQL Server databases.',
-      'Integrated 4 third-party services via a config-driven adapter pattern; identified and remediated a plaintext credential-logging vulnerability.',
+    id: 'skyt-technologies',
+    dateRange: 'SEP 2022 — MAY 2023',
+    title: 'Junior Frontend Engineer',
+    company: 'Skyt Technologies',
+    summary:
+      'Built a logistics web app connecting transporters and clients, and the shared React component library behind it.',
+    metrics: [
+      { value: '100+', label: 'bookings a month' },
+      { value: '10%', label: 'faster feature builds' },
     ],
-    highlight: { value: '160+', label: 'Automated tests shipped' },
+    bullets: [
+      'Built a reusable React component library adopted across the product, cutting new-feature development time by 10%.',
+      'Developed a logistics web application connecting transporters and clients, supporting 100+ monthly bookings.',
+      'Integrated third-party REST APIs for real-time data flow between transporters, clients and dispatch systems.',
+    ],
   },
   {
+    id: 'mainstack',
     dateRange: 'JUN 2023 — MAR 2026',
     title: 'Frontend Engineer',
     company: 'Mainstack',
+    summary:
+      'Built the referral program and the multi-currency ambassador payout system, plus the discount tools 60% of active merchants use.',
+    metrics: [
+      { value: '1,000+', label: 'merchants paid out' },
+      { value: '30%', label: 'fewer failed transactions' },
+      { value: '20%', label: 'more merchant referrals' },
+    ],
     bullets: [
       'Built the Mainstack Referral Program and multi-currency Ambassador payout system, contributing to 20% growth in merchant referrals and 15% of new sign-ups via affiliate channels.',
       'Developed a multi-channel payout system across 4 currencies, processing payouts for 1,000+ merchants with a 30% reduction in failed transactions.',
@@ -31,17 +46,24 @@ export const experience: ExperienceEntry[] = [
       'Optimized 6+ applications for Core Web Vitals, SEO and WCAG accessibility, improving average page load time by 30%.',
       'Contributed to a scalable design system adopted across 6 products, cutting design-to-dev handoff time by 40%.',
     ],
-    highlight: { value: '30%', label: 'Fewer failed transactions' },
   },
   {
-    dateRange: 'SEP 2022 — MAY 2023',
-    title: 'Junior Frontend Engineer',
-    company: 'Skyt Technologies',
-    bullets: [
-      'Built a reusable React component library adopted across the product, cutting new-feature development time by 10%.',
-      'Developed a logistics web application connecting transporters and clients, supporting 100+ monthly bookings.',
-      'Integrated third-party REST APIs for real-time data flow between transporters, clients and dispatch systems.',
+    id: 'skytlabs',
+    dateRange: '2026 — PRESENT',
+    title: 'Full-Stack Engineer (Contract)',
+    company: 'SkytLabs',
+    summary:
+      'Built a production NestJS backend for a field data-collection platform, from schema to deployment, and fixed a plaintext credential-logging flaw.',
+    metrics: [
+      { value: '160+', label: 'automated tests' },
+      { value: '21', label: 'REST endpoints' },
+      { value: '4', label: 'services integrated' },
     ],
-    highlight: { value: '100+', label: 'Monthly bookings supported' },
+    bullets: [
+      'Designed and built a production NestJS/TypeScript backend for a field data-collection platform, from schema design through deployment.',
+      'Architected a ports-and-adapters API with 21 REST endpoints across 11 modules, backed by 160+ automated tests and typed OpenAPI/Swagger contracts.',
+      'Built secure agent authentication (password + passwordless OTP, device-binding, session/refresh tokens) and a mirror-sync job queue bridging two independent SQL Server databases.',
+      'Integrated 4 third-party services via a config-driven adapter pattern; identified and remediated a plaintext credential-logging vulnerability.',
+    ],
   },
 ];

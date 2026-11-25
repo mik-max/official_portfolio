@@ -21,7 +21,7 @@ export default function Home() {
   usePortfolioAnimations(heroRef, setActiveSection);
 
   return (
-    <main className="bg-paper text-ink min-h-screen overflow-x-hidden font-sans selection:bg-accent selection:text-paper font-medium">
+    <main className="bg-paper text-ink min-h-screen overflow-x-clip font-sans selection:bg-accent selection:text-paper font-medium">
       <Navbar navItems={navItems} activeSection={activeSection} />
       <Hero heroRef={heroRef} />
       <About />

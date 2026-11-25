@@ -6,7 +6,8 @@ const totalSkills = skillCategories.reduce((sum, category) => sum + category.ski
 const categoryCount = skillCategories.length;
 const typescriptCount = projects.filter((p) => p.tags.includes('TypeScript')).length;
 const gsapCount = projects.filter((p) => p.tags.includes('GSAP')).length;
-const testsHighlight = experience.find((e) => e.highlight.label.toLowerCase().includes('test'))?.highlight.value ?? '160+';
+const testsHighlight =
+  experience.flatMap((e) => e.metrics).find((m) => m.label.toLowerCase().includes('test'))?.value ?? '160+';
 
 export function Skills() {
   return (
